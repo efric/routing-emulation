@@ -137,7 +137,7 @@ def do_listen(server, peer_port, window_size, mode, n):
                                                                                       round(
                                                                                           100 * receiver_dropped / receiver_total,
                                                                                           2)))
-                    receiver_start = receiver_end = receiver_dropped = receiver_count = receiver_total = 0
+                    receiver_start = receiver_end = receiver_count = receiver_dropped = receiver_total = 0
                     receiver_final = -1
                     receiver_buffer = ['\0'] * 65535
                     receiver_done = False
@@ -146,24 +146,20 @@ def do_listen(server, peer_port, window_size, mode, n):
         lock.release()
 
 
-def timeout(server, seq, packet, peer_port, sender_buffer):
+def timeout(server, seq, packet, peer_port, sender_buffer, done):
     global acknowledged, sender_dropped, sender_total
 
     while True:
         time.sleep(0.5)
         lock.acquire()
         if seq in acknowledged:
-            if len(acknowledged) == len(sender_buffer):
-                for t in threads:
-                    if threading.current_thread() != t:
-                        t.join()
+            if done and len(acknowledged) == len(sender_buffer):
                 print('[Summary] <{}>/<{}> packets dropped, loss rate = {}%'.format(sender_dropped, sender_total,
                                                                                     round(
                                                                                         100 * sender_dropped / sender_total,
                                                                                         2)))
                 acknowledged.clear()
                 sender_seen.clear()
-                threads.clear()
                 sender_dropped = sender_total = 0
             lock.release()
             break
@@ -202,7 +198,7 @@ def send(server, peer_port, window_size, buffer, mode, drop):
         sender_seen.add(seq)
         sender_total += 1
         lock.release()
-        threads.append(threading.Thread(target=timeout, args=(server, seq, packet, peer_port, sender_buffer)))
+        threads.append(threading.Thread(target=timeout, args=(server, seq, packet, peer_port, sender_buffer, done)))
         threads[-1].start()
 
     lock.acquire()
@@ -245,6 +241,9 @@ def do_send(server, peer_port, window_size, mode, n):
         for t in threads:
             if t:
                 t.join()
+        threads.clear()
+        # acknowledged.clear()
+        # sender_seen.clear()
 
 
 def init_srp(self_port, peer_port, window_size, mode, n):
