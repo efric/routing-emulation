@@ -2,7 +2,6 @@
 import sys
 import threading
 import json
-import time
 from sr_helper import recv_msg, create_listen_socket, current_milli_time
 
 lock = threading.Lock()
