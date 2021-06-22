@@ -56,6 +56,8 @@ def listen(server, me):
 
 def init(args):
     local_port = int(args[1])
+    if local_port < 1024 or local_port > 65534:
+        exit("UDP port number must be between 1024-65534")
 
     if args[-1] == "last":
         neighbor_info = args[2:-1]
@@ -66,6 +68,8 @@ def init(args):
 
     for i in range(0, len(neighbor_info), 2):
         neighbor_port, loss_rate = int(neighbor_info[i]), float(neighbor_info[i + 1])
+        if neighbor_port < 1024 or neighbor_port > 65534:
+            exit("UDP port number must be between 1024-65534")
         rt[neighbor_port] = loss_rate
         neighbors.add(neighbor_port)
 
