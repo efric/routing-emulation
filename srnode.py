@@ -153,14 +153,6 @@ def timeout(server, seq, packet, peer_port, sender_buffer, done):
         time.sleep(0.5)
         lock.acquire()
         if seq in acknowledged:
-            if done and len(acknowledged) == len(sender_buffer):
-                print('[Summary] <{}>/<{}> packets dropped, loss rate = {}%'.format(sender_dropped, sender_total,
-                                                                                    round(
-                                                                                        100 * sender_dropped / sender_total,
-                                                                                        2)))
-                acknowledged.clear()
-                sender_seen.clear()
-                sender_dropped = sender_total = 0
             lock.release()
             break
         print('[{}] packet{} timeout, resending'.format(current_milli_time(), seq))
@@ -229,7 +221,7 @@ def send(server, peer_port, window_size, buffer, mode, drop):
 
 
 def do_send(server, peer_port, window_size, mode, n):
-    global threads
+    global threads, sender_dropped, sender_total, acknowledged
     while True:
         user = input("node> ")
         user_input = user.split(" ")
@@ -242,6 +234,13 @@ def do_send(server, peer_port, window_size, mode, n):
             if t:
                 t.join()
         threads.clear()
+        print('[Summary] <{}>/<{}> packets dropped, loss rate = {}%'.format(sender_dropped, sender_total,
+                                                                            round(
+                                                                                100 * sender_dropped / sender_total,
+                                                                                2)))
+        acknowledged.clear()
+        sender_seen.clear()
+        sender_dropped = sender_total = 0
         # acknowledged.clear()
         # sender_seen.clear()
 
