@@ -309,4 +309,89 @@ eric.feng@instance-1:~/emulation$ ./dvnode.py 4444 2222 .8 3333 .5 last
 
 PA 3:
 
+(end of it since it is too long; in order: 1111, 2222, 3333, 4444)
 
+[1624420848073] Message sent from Node 1111 to Node 3333
+[1624420848073] Message sent from Node 1111 to Node 2222
+[1624420848225] Link to 2222: 19 packets sent, 1 packets lost, loss rate 0.05263157894736842
+[1624420848226] Link to 3333: 11 packets sent, 8 packets lost, loss rate 0.7272727272727273
+[1624420849227] Link to 2222: 19 packets sent, 1 packets lost, loss rate 0.05263157894736842
+[1624420849227] Link to 3333: 11 packets sent, 8 packets lost, loss rate 0.7272727272727273
+[1624420849347] Message received from Node 3333 to Node 1111
+[1624420849348] Node 1111 Routing Table
+- (0.05) -> Node 2222; Next hop -> Node 2222
+- (0.73) -> Node 3333; Next hop -> Node 2222
+- (0.64) -> Node 4444; Next hop -> Node 2222
+[1624420850228] Link to 2222: 19 packets sent, 1 packets lost, loss rate 0.05263157894736842
+[1624420850228] Link to 3333: 11 packets sent, 8 packets lost, loss rate 0.7272727272727273
+[1624420851229] Link to 2222: 19 packets sent, 1 packets lost, loss rate 0.05263157894736842
+[1624420851230] Link to 3333: 11 packets sent, 8 packets lost, loss rate 0.7272727272727273
+[1624420852231] Link to 2222: 19 packets sent, 1 packets lost, loss rate 0.05263157894736842
+[1624420852231] Link to 3333: 11 packets sent, 8 packets lost, loss rate 0.7272727272727273
+[1624420853079] Message sent from Node 1111 to Node 3333
+[1624420853079] Message sent from Node 1111 to Node 2222
+[1624420853232] Link to 2222: 19 packets sent, 1 packets lost, loss rate 0.05263157894736842
+[1624420853232] Link to 3333: 11 packets sent, 8 packets lost, loss rate 0.7272727272727273
+[1624420853646] Message received from Node 2222 to Node 1111
+[1624420853646] Message sent from Node 1111 to Node 3333
+[1624420853646] Message sent from Node 1111 to Node 2222
+[1624420853646] Node 1111 Routing Table
+- (0.05) -> Node 2222; Next hop -> Node 2222
+- (0.33) -> Node 3333; Next hop -> Node 2222
+- (0.64) -> Node 4444; Next hop -> Node 2222
+[1624420854233] Link to 2222: 19 packets sent, 1 packets lost, loss rate 0.05263157894736842
+[1624420854234] Link to 3333: 11 packets sent, 8 packets lost, loss rate 0.7272727272727273
+[1624420855235] Link to 2222: 19 packets sent, 1 packets lost, loss rate 0.05263157894736842
+[1624420855235] Link to 3333: 11 packets sent, 8 packets lost, loss rate 0.7272727272727273
+[1624420856236] Link to 2222: 19 packets sent, 1 packets lost, loss rate 0.05263157894736842
+[1624420856236] Link to 3333: 11 packets sent, 8 packets lost, loss rate 0.7272727272727273
+
+[1624420853645] Message sent from Node 2222 to Node 1111
+[1624420853646] Message received from Node 1111 to Node 2222
+[1624420853646] Node 2222 Routing Table
+- (0.28) -> Node 3333; Next hop -> Node 4444
+- (0.64) -> Node 4444; Next hop -> Node 4444
+- (0.64) -> Node 1111; Next hop -> Node 4444
+[1624420853789] Link to 3333: 18 packets sent, 5 packets lost, loss rate 0.2777777777777778
+[1624420853789] Link to 4444: 11 packets sent, 7 packets lost, loss rate 0.6363636363636364
+[1624420854790] Link to 3333: 18 packets sent, 5 packets lost, loss rate 0.2777777777777778
+[1624420854790] Link to 4444: 11 packets sent, 7 packets lost, loss rate 0.6363636363636364
+[1624420855792] Link to 3333: 18 packets sent, 5 packets lost, loss rate 0.2777777777777778
+[1624420855792] Link to 4444: 11 packets sent, 7 packets lost, loss rate 0.6363636363636364
+[1624420856793] Link to 3333: 18 packets sent, 5 packets lost, loss rate 0.2777777777777778
+[1624420856793] Link to 4444: 11 packets sent, 7 packets lost, loss rate 0.6363636363636364
+
+[1624420849347] Message sent from Node 3333 to Node 1111
+[1624420849532] Link to 4444: 14 packets sent, 6 packets lost, loss rate 0.42857142857142855
+[1624420850533] Link to 4444: 14 packets sent, 6 packets lost, loss rate 0.42857142857142855
+[1624420851534] Link to 4444: 14 packets sent, 6 packets lost, loss rate 0.42857142857142855
+[1624420852536] Link to 4444: 14 packets sent, 6 packets lost, loss rate 0.42857142857142855
+[1624420853079] Message received from Node 1111 to Node 3333
+[1624420853079] Node 3333 Routing Table
+- (1.27) -> Node 4444; Next hop -> Node 1111
+- (0.64) -> Node 1111; Next hop -> Node 1111
+- (0.64) -> Node 2222; Next hop -> Node 1111
+[1624420853537] Link to 4444: 14 packets sent, 6 packets lost, loss rate 0.42857142857142855
+[1624420853645] Message received from Node 2222 to Node 3333
+[1624420853645] Node 3333 Routing Table
+- (1.27) -> Node 4444; Next hop -> Node 1111
+- (0.64) -> Node 1111; Next hop -> Node 1111
+- (0.64) -> Node 2222; Next hop -> Node 1111
+[1624420853646] Message received from Node 1111 to Node 3333
+[1624420853646] Node 3333 Routing Table
+- (1.27) -> Node 4444; Next hop -> Node 1111
+- (0.64) -> Node 1111; Next hop -> Node 1111
+- (0.64) -> Node 2222; Next hop -> Node 1111
+[1624420854538] Link to 4444: 14 packets sent, 6 packets lost, loss rate 0.42857142857142855
+[1624420855539] Link to 4444: 14 packets sent, 6 packets lost, loss rate 0.42857142857142855
+
+[1624420849348] Message received from Node 3333 to Node 4444
+[1624420849348] Node 4444 Routing Table
+- (0.64) -> Node 2222; Next hop -> Node 2222
+- (0.64) -> Node 3333; Next hop -> Node 2222
+- (0.64) -> Node 1111; Next hop -> Node 2222
+[1624420853644] Message received from Node 2222 to Node 4444
+[1624420853645] Node 4444 Routing Table
+- (0.64) -> Node 2222; Next hop -> Node 2222
+- (0.64) -> Node 3333; Next hop -> Node 2222
+- (0.64) -> Node 1111; Next hop -> Node 2222

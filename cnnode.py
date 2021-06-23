@@ -132,6 +132,7 @@ def sendchanges(server, ip, me):
         curr_table = deepcopy(rt)
         if neighbor in receivers:
             curr_table[-1] = receivers[neighbor]["loss"]
+            print("send", neighbor, curr_table)
         print('[{}] Message sent from Node {} to Node {}'.format(current_milli_time(), me, neighbor))
         server.sendto(str.encode(json.dumps(curr_table)), (ip, neighbor))
 
