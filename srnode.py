@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 import threading
-import time
-from socket import *
-from random import seed, random
 import sys
+from random import seed, random
+from nodehelper import *
 
 seed()
+
+# sender ds
 lock = threading.Lock()
 acknowledged = set()
 sender_seen = set()
@@ -13,27 +14,12 @@ sender_start = sender_end = -1
 sender_dropped = sender_total = 0
 threads = []
 
+# receiver ds
 receiver_start = receiver_end = 0
 receiver_buffer = ['\0'] * 65535
 receiver_count = receiver_total = receiver_dropped = 0
 receiver_final = -1
 receiver_done = False
-
-
-# helpers
-def create_listen_socket(self_port):
-    sock = socket(AF_INET, SOCK_DGRAM)
-    sock.bind(('', self_port))  # socket is reachable by any address machine happens to have
-    return sock
-
-
-def recv_msg(sock, n):
-    data, addr = sock.recvfrom(n)
-    return data.decode(), addr
-
-
-def current_milli_time():
-    return round(time.time() * 1000)
 
 
 # helpers for receiver side
@@ -146,7 +132,7 @@ def do_listen(server, peer_port, window_size, mode, n):
         lock.release()
 
 
-def timeout(server, seq, packet, peer_port, sender_buffer, done):
+def timeout(server, seq, packet, peer_port):
     global acknowledged, sender_dropped, sender_total
 
     while True:
@@ -164,7 +150,7 @@ def timeout(server, seq, packet, peer_port, sender_buffer, done):
 def send(server, peer_port, window_size, buffer, mode, drop):
     global sender_seen, sender_start, sender_end, acknowledged
 
-    def send_msg(seq, data, done, mode, count, drop, sender_buffer):
+    def send_msg(seq, data, done, mode, count, drop):
         global sender_dropped, sender_total
 
         lock.acquire()
@@ -190,7 +176,7 @@ def send(server, peer_port, window_size, buffer, mode, drop):
         sender_seen.add(seq)
         sender_total += 1
         lock.release()
-        threads.append(threading.Thread(target=timeout, args=(server, seq, packet, peer_port, sender_buffer, done)))
+        threads.append(threading.Thread(target=timeout, args=(server, seq, packet, peer_port)))
         threads[-1].start()
 
     lock.acquire()
@@ -215,9 +201,9 @@ def send(server, peer_port, window_size, buffer, mode, drop):
                 if mode == "-d":
                     count = (count + 1) % drop
                 if n == len(buffer) - 1:
-                    send_msg(n, buffer[n], True, mode, count, drop, buffer)
+                    send_msg(n, buffer[n], True, mode, count, drop)
                 else:
-                    send_msg(n, buffer[n], False, mode, count, drop, buffer)
+                    send_msg(n, buffer[n], False, mode, count, drop)
 
 
 def do_send(server, peer_port, window_size, mode, n):
@@ -241,8 +227,6 @@ def do_send(server, peer_port, window_size, mode, n):
         acknowledged.clear()
         sender_seen.clear()
         sender_dropped = sender_total = 0
-        # acknowledged.clear()
-        # sender_seen.clear()
 
 
 def init_srp(self_port, peer_port, window_size, mode, n):
