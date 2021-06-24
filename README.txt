@@ -22,6 +22,8 @@ This program is bidirectional and thus both nodes may send/receive messages to e
 
 Edge case: If a receiver receives the complete message (i.e received \0 in a message and all other characters before it) but the sender hasn't received ack for a message that is NOT the last sequence number (e.g the message is "hello" and "hel_o" has been ACK'd but the last 'l' hasn't yet) then the sender may send packets requesting ACK for it and receiver will update its dropped/total for this message towards the next round of messages between the two nodes because on its side it has already received all characters. However, this does not pollute the next message content itself as the new message will overwrite the receiver buffer in the next round.
 
+This part of the assignment works as intended.
+
 
 Part 3: Distance Vector protocol
 
@@ -34,6 +36,8 @@ where last is an optional argument which will kick start the algorithm. local-po
 
 Implementation details:
 THe program begins with the function 'init' which is used to filter improper input (port out of range, etc) and then parses the user input of neighbor port, loss rate pairs. At this point, we initialize several data structures. dvnode.py has a dictionary called rt (routing table) which has key: port number and distance. The value will be updated as it receives information from its neighbors. Another dictionary, neighbors_cost, contains the permanent link cost of direct neighbors for use in evaluation of DP. Each node also has a set that keeps track of its direct neighbors. Then, each node listens for messages. The node which received 'last' as user input will send out a message containg its routing table to its direct neighbors to kick start the protocol. When neighbors receive input, it will parse the dictionary sent by its neighbor and update its own table. If any changes have been made, or if its the node has just been contacted for the first time, it will send out its routing table to all its neighbors. Distance vectors within the routing table are updated by the minimum between the cost of the link (neighbors_cost[node]) and distance vector of the pertaining node and the current distance vector in the current routing table (rt) according to the bellman-ford algorithm. 
+
+This part of the assignment works as intended.
 
 Part 4: Combined Protocol
 
@@ -53,3 +57,5 @@ When 'listen' receives a new message, it will check to see what type of message 
 The probe message that nodes in the senders list send is the first 10 characters of the alphabet (abcdefghij) and the window size is always 5. When the last character is received (in timeout), the routing table of the sender's node is updated (if there is change) and it will then send this table to all neighbors. 
 
 To start sending probe messages, probe receivers must first tell the probe senders the link loss rate in an initial contact message. This is included as part of the initial routing table information when the probe receiver is first turned on (when it first received a message and then sending out its routing table information for the first time). The initial loss rate of a particular link (-p value for SR protocol) is embedded in the dictionary as the value for a key -1. 
+
+This part of the assignment has some problems--the links do not always converge to what is user input.
