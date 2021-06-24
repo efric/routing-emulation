@@ -7,7 +7,7 @@ from nodehelper import *
 lock = threading.Lock()
 rt = {}
 next_hop = {}
-neighbors = {}
+neighbors_cost = {}
 
 
 def print_rt(me):
@@ -24,7 +24,7 @@ def print_rt(me):
 
 def sendchanges(server, ip, me):
     mytable = json.dumps(rt)
-    for neighbor in neighbors.keys():
+    for neighbor in neighbors_cost.keys():
         print('[{}] Message sent from Node {} to Node {}'.format(current_milli_time(), me, neighbor))
         server.sendto(str.encode(mytable), (ip, neighbor))
 
@@ -40,9 +40,9 @@ def listen(server, me):
 
         for node, dv in d.items():
             node, dv = int(node), round(float(dv), 2)
-            if node not in rt or neighbors[port] + dv < rt[node]:
+            if node not in rt or neighbors_cost[port] + dv < rt[node]:
                 change = True
-                rt[node] = neighbors[port] + dv
+                rt[node] = neighbors_cost[port] + dv
                 next_hop[node] = port
 
         if change or first:
@@ -72,7 +72,7 @@ def init(args):
         if neighbor_port < 1024 or neighbor_port > 65534:
             exit("UDP port number must be between 1024-65534")
         rt[neighbor_port] = loss_rate
-        neighbors[neighbor_port] = loss_rate
+        neighbors_cost[neighbor_port] = loss_rate
 
     rt[local_port] = 0
     server = create_listen_socket(local_port)
