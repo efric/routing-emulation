@@ -1,127 +1,1285 @@
-PA 1:
+PA 1 test input:
 
-Sender:
-eric.feng@instance-1:~/emulation$ ./srnode.py 1111 2222 3 -p 0.5
-node> send aklsdjklajsdjk;    
-[1624420264194] packet0 dropped
-[1624420264194] packet1 dropped
-[1624420264700] packet1 timeout, resending
-[1624420264700] ACK1 received, window starts at 0
-[1624420264701] packet0 timeout, resending
-[1624420265206] packet0 timeout, resending
-[1624420265713] packet0 timeout, resending
-[1624420265713] ACK0 received, window starts at 2
-[1624420265713] packet2 dropped
-[1624420265713] packet3 dropped
-[1624420266219] packet2 timeout, resending
-[1624420266219] packet3 timeout, resending
-[1624420266220] ACK2 received, window starts at 3
-[1624420266220] packet4 d sent
-[1624420266220] ACK4 received, window starts at 3
-[1624420266725] packet3 timeout, resending
-[1624420267231] packet3 timeout, resending
-[1624420267736] packet3 timeout, resending
-[1624420267742] ACK3 received, window starts at 5
-[1624420267742] packet5 dropped
-[1624420267742] packet6 dropped
-[1624420268242] packet5 timeout, resending
-[1624420268243] ACK5 received, window starts at 6
-[1624420268243] packet7 l sent
-[1624420268243] packet6 timeout, resending
-[1624420268244] ACK7 received, window starts at 6
-[1624420268749] packet6 timeout, resending
-[1624420269254] packet6 timeout, resending
-[1624420269255] ACK6 received, window starts at 8
-[1624420269255] packet8 a sent
-[1624420269255] packet9 dropped
-[1624420269760] packet8 timeout, resending
-[1624420269761] packet9 timeout, resending
-[1624420269761] ACK8 received, window starts at 9
-[1624420269761] packet10 s sent
-[1624420270266] packet9 timeout, resending
-[1624420270266] packet10 timeout, resending
-[1624420270267] ACK10 received, window starts at 9
-[1624420270772] packet9 timeout, resending
-[1624420270772] ACK9 received, window starts at 11
-[1624420270772] packet11 dropped
-[1624420270772] packet12 dropped
-[1624420271278] packet11 timeout, resending
-[1624420271278] ACK11 received, window starts at 12
-[1624420271278] packet13 k sent
-[1624420271278] packet12 timeout, resending
-[1624420271279] ACK12 received, window starts at 13
-[1624420271279] packet14 ; sent
-[1624420271784] packet13 timeout, resending
-[1624420271789] packet14 timeout, resending
-[1624420271790] ACK14 received, window starts at 13
-[1624420272289] packet13 timeout, resending
-[1624420272290] ACK13 received, window starts at 15
-[Summary] <9>/<15> packets dropped, loss rate = 60.0%
+eric.feng@instance-1:~/emulation$ ./srnode.py 1111 2222 3 -p 0.5  
+node> send Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live.
+[1624506204806] packet0 F sent
+[1624506204806] packet1 a sent
+[1624506204806] ACK0 received, window starts at 1
+[1624506204806] packet2 dropped
+[1624506204807] ACK1 received, window starts at 2
+[1624506204807] packet3   sent
+[1624506205312] packet2 timeout, resending
+[1624506205313] packet3 timeout, resending
+[1624506205313] ACK2 received, window starts at 3
+[1624506205313] ACK3 received, window starts at 4
+[1624506205313] packet4 f sent
+[1624506205313] ACK4 received, window starts at 5
+[1624506205313] packet5 dropped
+[1624506205314] packet6 dropped
+[1624506205819] packet5 timeout, resending
+[1624506205819] packet6 timeout, resending
+[1624506205819] ACK6 received, window starts at 5
+[1624506206325] packet5 timeout, resending
+[1624506206330] ACK5 received, window starts at 7
+[1624506206330] packet7   sent
+[1624506206331] packet8 a sent
+[1624506206331] ACK8 received, window starts at 7
+[1624506206836] packet7 timeout, resending
+[1624506207342] packet7 timeout, resending
+[1624506207348] ACK7 received, window starts at 9
+[1624506207348] packet9 w sent
+[1624506207348] packet10 dropped
+[1624506207854] packet9 timeout, resending
+[1624506207854] packet10 timeout, resending
+[1624506207854] ACK9 received, window starts at 10
+[1624506207855] packet11 y sent
+[1624506207855] ACK10 received, window starts at 11
+[1624506207855] ACK11 received, window starts at 12
+[1624506207855] packet12 , sent
+[1624506207856] packet13   sent
+[1624506207856] ACK13 received, window starts at 12
+[1624506208360] packet12 timeout, resending
+[1624506208365] ACK12 received, window starts at 14
+[1624506208366] packet14 b sent
+[1624506208366] packet15 e sent
+[1624506208366] ACK15 received, window starts at 14
+[1624506208872] packet14 timeout, resending
+[1624506208877] ACK14 received, window starts at 16
+[1624506208877] packet16 dropped
+[1624506208878] packet17 i sent
+[1624506208883] ACK17 received, window starts at 16
+[1624506209383] packet16 timeout, resending
+[1624506209384] ACK16 received, window starts at 18
+[1624506209384] packet18 dropped
+[1624506209384] packet19 dropped
+[1624506209890] packet19 timeout, resending
+[1624506209890] packet18 timeout, resending
+[1624506209895] ACK18 received, window starts at 19
+[1624506209896] packet20   sent
+[1624506209896] ACK20 received, window starts at 19
+[1624506210401] packet19 timeout, resending
+[1624506210401] ACK19 received, window starts at 21
+[1624506210402] packet21 dropped
+[1624506210402] packet22 dropped
+[1624506210907] packet21 timeout, resending
+[1624506210908] packet22 timeout, resending
+[1624506210908] ACK22 received, window starts at 21
+[1624506211413] packet21 timeout, resending
+[1624506211418] ACK21 received, window starts at 23
+[1624506211419] packet23 e sent
+[1624506211419] packet24   sent
+[1624506211419] ACK24 received, window starts at 23
+[1624506211925] packet23 timeout, resending
+[1624506212430] packet23 timeout, resending
+[1624506212436] ACK23 received, window starts at 25
+[1624506212436] packet25 dropped
+[1624506212436] packet26 o sent
+[1624506212442] ACK26 received, window starts at 25
+[1624506212942] packet25 timeout, resending
+[1624506213448] packet25 timeout, resending
+[1624506213454] ACK25 received, window starts at 27
+[1624506213454] packet27 dropped
+[1624506213454] packet28 dropped
+[1624506213960] packet27 timeout, resending
+[1624506213960] packet28 timeout, resending
+[1624506213960] ACK27 received, window starts at 28
+[1624506213960] packet29 dropped
+[1624506214466] packet29 timeout, resending
+[1624506214466] packet28 timeout, resending
+[1624506214466] ACK28 received, window starts at 29
+[1624506214466] packet30 m sent
+[1624506214972] packet30 timeout, resending
+[1624506214972] packet29 timeout, resending
+[1624506214972] ACK30 received, window starts at 29
+[1624506214978] ACK29 received, window starts at 31
+[1624506214978] packet31 o sent
+[1624506214978] ACK31 received, window starts at 32
+[1624506214978] packet32 dropped
+[1624506214979] packet33 dropped
+[1624506215484] packet32 timeout, resending
+[1624506215485] packet33 timeout, resending
+[1624506215485] ACK32 received, window starts at 33
+[1624506215485] packet34 t sent
+[1624506215485] ACK34 received, window starts at 33
+[1624506215990] packet33 timeout, resending
+[1624506215996] ACK33 received, window starts at 35
+[1624506215996] packet35 dropped
+[1624506215996] packet36 dropped
+[1624506216502] packet35 timeout, resending
+[1624506216502] packet36 timeout, resending
+[1624506217008] packet35 timeout, resending
+[1624506217008] packet36 timeout, resending
+[1624506217513] packet36 timeout, resending
+[1624506217514] packet35 timeout, resending
+[1624506217519] ACK36 received, window starts at 35
+[1624506217519] ACK35 received, window starts at 37
+[1624506217519] packet37 dropped
+[1624506217520] packet38 dropped
+[1624506218025] packet37 timeout, resending
+[1624506218029] packet38 timeout, resending
+[1624506218029] ACK38 received, window starts at 37
+[1624506218531] packet37 timeout, resending
+[1624506218537] ACK37 received, window starts at 39
+[1624506218537] packet39 dropped
+[1624506218537] packet40 dropped
+[1624506219043] packet39 timeout, resending
+[1624506219043] ACK39 received, window starts at 40
+[1624506219043] packet40 timeout, resending
+[1624506219044] packet41 f sent
+[1624506219044] ACK41 received, window starts at 40
+[1624506219549] packet40 timeout, resending
+[1624506219550] ACK40 received, window starts at 42
+[1624506219550] packet42 a sent
+[1624506219550] ACK42 received, window starts at 43
+[1624506219550] packet43 dropped
+[1624506219550] packet44   sent
+[1624506220054] packet44 timeout, resending
+[1624506220055] packet43 timeout, resending
+[1624506220055] ACK43 received, window starts at 44
+[1624506220055] packet45 dropped
+[1624506220560] packet44 timeout, resending
+[1624506220561] ACK44 received, window starts at 45
+[1624506220561] packet46 dropped
+[1624506220561] packet45 timeout, resending
+[1624506220561] ACK45 received, window starts at 46
+[1624506220562] packet47 o sent
+[1624506220562] ACK47 received, window starts at 46
+[1624506221067] packet46 timeout, resending
+[1624506221067] ACK46 received, window starts at 48
+[1624506221067] packet48 dropped
+[1624506221067] packet49   sent
+[1624506221068] ACK49 received, window starts at 48
+[1624506221572] packet48 timeout, resending
+[1624506221578] ACK48 received, window starts at 50
+[1624506221578] packet50 t sent
+[1624506221579] packet51 dropped
+[1624506222084] packet51 timeout, resending
+[1624506222085] packet50 timeout, resending
+[1624506222085] ACK51 received, window starts at 50
+[1624506222090] ACK50 received, window starts at 52
+[1624506222090] packet52 dropped
+[1624506222091] packet53   sent
+[1624506222096] ACK53 received, window starts at 52
+[1624506222596] packet52 timeout, resending
+[1624506222602] ACK52 received, window starts at 54
+[1624506222602] packet54 dropped
+[1624506222602] packet55 dropped
+[1624506223108] packet54 timeout, resending
+[1624506223108] ACK54 received, window starts at 55
+[1624506223108] packet56 dropped
+[1624506223109] packet55 timeout, resending
+[1624506223614] packet56 timeout, resending
+[1624506223614] ACK56 received, window starts at 55
+[1624506223614] packet55 timeout, resending
+[1624506223615] ACK55 received, window starts at 57
+[1624506223615] packet57 n sent
+[1624506223615] ACK57 received, window starts at 58
+[1624506223615] packet58 t sent
+[1624506223615] ACK58 received, window starts at 59
+[1624506223615] packet59 r sent
+[1624506223616] ACK59 received, window starts at 60
+[1624506223616] packet60 i sent
+[1624506223616] ACK60 received, window starts at 61
+[1624506223616] packet61 dropped
+[1624506223616] packet62 s sent
+[1624506223617] ACK62 received, window starts at 61
+[1624506224120] packet61 timeout, resending
+[1624506224626] packet61 timeout, resending
+[1624506224632] ACK61 received, window starts at 63
+[1624506224632] packet63   sent
+[1624506224632] packet64 dropped
+[1624506225138] packet63 timeout, resending
+[1624506225138] packet64 timeout, resending
+[1624506225139] ACK64 received, window starts at 63
+[1624506225644] packet63 timeout, resending
+[1624506225644] ACK63 received, window starts at 65
+[1624506225644] packet65 dropped
+[1624506225644] packet66 dropped
+[1624506226150] packet65 timeout, resending
+[1624506226150] packet66 timeout, resending
+[1624506226151] ACK66 received, window starts at 65
+[1624506226656] packet65 timeout, resending
+[1624506227161] packet65 timeout, resending
+[1624506227167] ACK65 received, window starts at 67
+[1624506227167] packet67 dropped
+[1624506227167] packet68 dropped
+[1624506227673] packet67 timeout, resending
+[1624506227674] packet68 timeout, resending
+[1624506227674] ACK67 received, window starts at 68
+[1624506227674] packet69 i sent
+[1624506227674] ACK69 received, window starts at 68
+[1624506228179] packet68 timeout, resending
+[1624506228685] packet68 timeout, resending
+[1624506229190] packet68 timeout, resending
+[1624506229196] ACK68 received, window starts at 70
+[1624506229196] packet70 dropped
+[1624506229196] packet71   sent
+[1624506229196] ACK71 received, window starts at 70
+[1624506229702] packet70 timeout, resending
+[1624506229702] ACK70 received, window starts at 72
+[1624506229703] packet72 dropped
+[1624506229703] packet73 dropped
+[1624506230208] packet72 timeout, resending
+[1624506230209] ACK72 received, window starts at 73
+[1624506230209] packet74 d sent
+[1624506230209] packet73 timeout, resending
+[1624506230209] ACK74 received, window starts at 73
+[1624506230714] packet73 timeout, resending
+[1624506230720] ACK73 received, window starts at 75
+[1624506230720] packet75 dropped
+[1624506230720] packet76 C sent
+[1624506231226] packet75 timeout, resending
+[1624506231226] packet76 timeout, resending
+[1624506231227] ACK75 received, window starts at 76
+[1624506231227] packet77 dropped
+[1624506231227] ACK76 received, window starts at 77
+[1624506231227] packet78 n sent
+[1624506231227] ACK78 received, window starts at 77
+[1624506231732] packet77 timeout, resending
+[1624506232238] packet77 timeout, resending
+[1624506232244] ACK77 received, window starts at 79
+[1624506232244] packet79 dropped
+[1624506232244] packet80 dropped
+[1624506232750] packet79 timeout, resending
+[1624506232756] packet80 timeout, resending
+[1624506232756] ACK79 received, window starts at 80
+[1624506232756] ACK80 received, window starts at 81
+[1624506232756] packet81 dropped
+[1624506232756] packet82 a sent
+[1624506233262] packet81 timeout, resending
+[1624506233262] packet82 timeout, resending
+[1624506233268] ACK82 received, window starts at 81
+[1624506233768] packet81 timeout, resending
+[1624506234273] packet81 timeout, resending
+[1624506234779] packet81 timeout, resending
+[1624506235285] packet81 timeout, resending
+[1624506235291] ACK81 received, window starts at 83
+[1624506235291] packet83 n sent
+[1624506235291] ACK83 received, window starts at 84
+[1624506235291] packet84 t sent
+[1624506235291] packet85 i sent
+[1624506235292] ACK85 received, window starts at 84
+[1624506235797] packet84 timeout, resending
+[1624506235802] ACK84 received, window starts at 86
+[1624506235803] packet86 a sent
+[1624506235803] packet87 , sent
+[1624506235803] ACK87 received, window starts at 86
+[1624506236309] packet86 timeout, resending
+[1624506236309] ACK86 received, window starts at 88
+[1624506236309] packet88 dropped
+[1624506236309] packet89 t sent
+[1624506236315] ACK89 received, window starts at 88
+[1624506236814] packet88 timeout, resending
+[1624506236815] ACK88 received, window starts at 90
+[1624506236815] packet90 dropped
+[1624506236815] packet91 e sent
+[1624506236821] ACK91 received, window starts at 90
+[1624506237321] packet90 timeout, resending
+[1624506237321] ACK90 received, window starts at 92
+[1624506237321] packet92 r sent
+[1624506237321] ACK92 received, window starts at 93
+[1624506237322] packet93 dropped
+[1624506237322] packet94 dropped
+[1624506237827] packet93 timeout, resending
+[1624506237827] packet94 timeout, resending
+[1624506238333] packet93 timeout, resending
+[1624506238333] packet94 timeout, resending
+[1624506238334] ACK93 received, window starts at 94
+[1624506238334] ACK94 received, window starts at 95
+[1624506238334] packet95 l sent
+[1624506238334] ACK95 received, window starts at 96
+[1624506238334] packet96 dropped
+[1624506238334] packet97 v sent
+[1624506238334] ACK97 received, window starts at 96
+[1624506238839] packet96 timeout, resending
+[1624506239345] packet96 timeout, resending
+[1624506239345] ACK96 received, window starts at 98
+[1624506239345] packet98 dropped
+[1624506239346] packet99 dropped
+[1624506239851] packet99 timeout, resending
+[1624506239851] packet98 timeout, resending
+[1624506239857] ACK98 received, window starts at 99
+[1624506240362] packet99 timeout, resending
+[1624506240364] ACK99 received, window starts at 100
+[Summary] <51>/<100> packets dropped, loss rate = 51.0%
+node> 
+[1624506339593] packet0 L received
+[1624506339593] packet0 L dropped
+[1624506339594] packet1 o received
+[1624506339594] ACK1 sent, window starts at 2
+[1624506340100] duplicate packet0 L received, discarded
+[1624506340100] packet0 L dropped
+[1624506340605] duplicate packet0 L received, discarded
+[1624506340606] ACK0 sent, window starts at 2
+[1624506340611] packet2 r received
+[1624506340611] packet2 r dropped
+[1624506340611] packet3 e received
+[1624506340611] ACK3 sent, window starts at 4
+[1624506341117] duplicate packet2 r received, discarded
+[1624506341117] ACK2 sent, window starts at 4
+[1624506341117] packet4 m received
+[1624506341117] ACK4 sent, window starts at 5
+[1624506341118] packet6 i received out of order, buffered
+[1624506341118] ACK6 sent, window starts at 5
+[1624506341623] packet5   received
+[1624506341623] packet5   dropped
+[1624506342129] duplicate packet5   received, discarded
+[1624506342129] ACK5 sent, window starts at 7
+[1624506342135] packet8 s received out of order, buffered
+[1624506342135] packet8 s dropped
+[1624506342640] packet7 p received
+[1624506342640] ACK7 sent, window starts at 9
+[1624506342641] duplicate packet8 s received, discarded
+[1624506342641] packet8 s dropped
+[1624506342641] packet9 u received
+[1624506342641] ACK9 sent, window starts at 10
+[1624506343146] duplicate packet8 s received, discarded
+[1624506343147] ACK8 sent, window starts at 10
+[1624506343152] packet10 m received
+[1624506343152] packet10 m dropped
+[1624506343152] packet11   received
+[1624506343152] ACK11 sent, window starts at 12
+[1624506343658] duplicate packet10 m received, discarded
+[1624506343658] packet10 m dropped
+[1624506344164] duplicate packet10 m received, discarded
+[1624506344165] ACK10 sent, window starts at 12
+[1624506344165] packet12 d received
+[1624506344165] packet12 d dropped
+[1624506344165] packet13 o received
+[1624506344165] packet13 o dropped
+[1624506344671] duplicate packet12 d received, discarded
+[1624506344671] ACK12 sent, window starts at 14
+[1624506344671] duplicate packet13 o received, discarded
+[1624506344671] ACK13 sent, window starts at 14
+[1624506344671] packet14 l received
+[1624506344671] packet14 l dropped
+[1624506344672] packet15 o received
+[1624506344672] ACK15 sent, window starts at 16
+[1624506345176] duplicate packet14 l received, discarded
+[1624506345177] ACK14 sent, window starts at 16
+[1624506345182] packet16 r received
+[1624506345182] packet16 r dropped
+[1624506345182] packet17   received
+[1624506345182] ACK17 sent, window starts at 18
+[1624506345683] duplicate packet16 r received, discarded
+[1624506345683] ACK16 sent, window starts at 18
+[1624506345684] packet19 i received out of order, buffered
+[1624506345684] ACK19 sent, window starts at 18
+[1624506346189] packet18 s received
+[1624506346189] packet18 s dropped
+[1624506346695] duplicate packet18 s received, discarded
+[1624506346695] packet18 s dropped
+[1624506347201] duplicate packet18 s received, discarded
+[1624506347201] packet18 s dropped
+[1624506347707] duplicate packet18 s received, discarded
+[1624506347707] ACK18 sent, window starts at 20
+[1624506347712] packet20 t received
+[1624506347712] ACK20 sent, window starts at 21
+[1624506347713] packet21   received
+[1624506347713] ACK21 sent, window starts at 22
+[1624506348218] packet22 a received
+[1624506348219] ACK22 sent, window starts at 23
+[1624506348219] packet23 m received
+[1624506348219] packet23 m dropped
+[1624506348219] packet24 e received
+[1624506348219] ACK24 sent, window starts at 25
+[1624506348725] duplicate packet23 m received, discarded
+[1624506348725] ACK23 sent, window starts at 25
+[1624506348730] packet25 t received
+[1624506348730] packet25 t dropped
+[1624506349236] packet26 , received
+[1624506349237] packet26 , dropped
+[1624506349237] duplicate packet25 t received, discarded
+[1624506349237] ACK25 sent, window starts at 27
+[1624506349742] duplicate packet26 , received, discarded
+[1624506349742] ACK26 sent, window starts at 27
+[1624506349748] packet27   received
+[1624506349748] packet27   dropped
+[1624506349748] packet28 c received
+[1624506349748] ACK28 sent, window starts at 29
+[1624506350254] duplicate packet27   received, discarded
+[1624506350254] packet27   dropped
+[1624506350760] duplicate packet27   received, discarded
+[1624506350760] packet27   dropped
+[1624506351265] duplicate packet27   received, discarded
+[1624506351266] packet27   dropped
+[1624506351771] duplicate packet27   received, discarded
+[1624506351771] ACK27 sent, window starts at 29
+[1624506352299] packet29 o received
+[1624506352299] ACK29 sent, window starts at 30
+[1624506352299] packet31 s received out of order, buffered
+[1624506352299] ACK31 sent, window starts at 30
+[1624506352300] packet30 n received
+[1624506352300] packet30 n dropped
+[1624506352805] duplicate packet30 n received, discarded
+[1624506352805] ACK30 sent, window starts at 32
+[1624506352811] packet33 c received out of order, buffered
+[1624506352811] ACK33 sent, window starts at 32
+[1624506353317] packet32 e received
+[1624506353317] ACK32 sent, window starts at 34
+[1624506353317] packet35 e received out of order, buffered
+[1624506353317] packet35 e dropped
+[1624506353823] packet34 t received
+[1624506353823] ACK34 sent, window starts at 36
+[1624506353823] duplicate packet35 e received, discarded
+[1624506353823] packet35 e dropped
+[1624506353828] packet36 t received
+[1624506353828] packet36 t dropped
+[1624506354329] duplicate packet35 e received, discarded
+[1624506354329] packet35 e dropped
+[1624506354334] duplicate packet36 t received, discarded
+[1624506354334] ACK36 sent, window starts at 37
+[1624506354834] duplicate packet35 e received, discarded
+[1624506354834] ACK35 sent, window starts at 37
+[1624506354835] packet38 e received out of order, buffered
+[1624506354835] ACK38 sent, window starts at 37
+[1624506355340] packet37 u received
+[1624506355340] ACK37 sent, window starts at 39
+[1624506355341] packet39 r received
+[1624506355341] ACK39 sent, window starts at 40
+[1624506355847] packet40   received
+[1624506355847] packet40   dropped
+[1624506355847] packet41 a received
+[1624506355847] packet41 a dropped
+[1624506356352] duplicate packet41 a received, discarded
+[1624506356352] packet41 a dropped
+[1624506356353] duplicate packet40   received, discarded
+[1624506356353] packet40   dropped
+[1624506356858] duplicate packet40   received, discarded
+[1624506356858] packet40   dropped
+[1624506356859] duplicate packet41 a received, discarded
+[1624506356859] packet41 a dropped
+[1624506357364] duplicate packet40   received, discarded
+[1624506357364] ACK40 sent, window starts at 42
+[1624506357365] duplicate packet41 a received, discarded
+[1624506357365] ACK41 sent, window starts at 42
+[1624506357365] packet43 i received out of order, buffered
+[1624506357365] ACK43 sent, window starts at 42
+[1624506357870] packet42 d received
+[1624506357870] ACK42 sent, window starts at 44
+[1624506357876] packet44 p received
+[1624506357876] ACK44 sent, window starts at 45
+[1624506357876] packet45 i received
+[1624506357876] packet45 i dropped
+[1624506358382] duplicate packet45 i received, discarded
+[1624506358382] ACK45 sent, window starts at 46
+[1624506358388] packet46 s received
+[1624506358388] packet46 s dropped
+[1624506358894] duplicate packet46 s received, discarded
+[1624506358894] ACK46 sent, window starts at 47
+[1624506358894] packet47 c received
+[1624506358894] ACK47 sent, window starts at 48
+[1624506358894] packet48 i received
+[1624506358894] packet48 i dropped
+[1624506358895] packet49 n received
+[1624506358895] ACK49 sent, window starts at 50
+[1624506359400] duplicate packet48 i received, discarded
+[1624506359400] packet48 i dropped
+[1624506359905] duplicate packet48 i received, discarded
+[1624506359906] ACK48 sent, window starts at 50
+[1624506359906] packet50 g received
+[1624506359906] ACK50 sent, window starts at 51
+[1624506359906] packet51   received
+[1624506359906] ACK51 sent, window starts at 52
+[1624506359907] packet52 e received
+[1624506359907] ACK52 sent, window starts at 53
+[1624506359907] packet53 l received
+[1624506359907] ACK53 sent, window starts at 54
+[1624506359907] packet54 i received
+[1624506359907] ACK54 sent, window starts at 55
+[1624506359908] packet55 t received
+[1624506359908] packet55 t dropped
+[1624506359908] packet56 . received
+[1624506359908] packet56 . dropped
+[1624506360412] duplicate packet55 t received, discarded
+[1624506360412] ACK55 sent, window starts at 57
+[1624506360412] duplicate packet56 . received, discarded
+[1624506360412] packet56 . dropped
+[1624506360412] packet57   received
+[1624506360412] packet57   dropped
+[1624506360918] duplicate packet56 . received, discarded
+[1624506360918] packet56 . dropped
+[1624506360922] duplicate packet57   received, discarded
+[1624506360922] packet57   dropped
+[1624506361424] duplicate packet57   received, discarded
+[1624506361424] packet57   dropped
+[1624506361424] duplicate packet56 . received, discarded
+[1624506361424] ACK56 sent, window starts at 58
+[1624506361930] duplicate packet57   received, discarded
+[1624506361930] ACK57 sent, window starts at 58
+[1624506361930] packet59 e received out of order, buffered
+[1624506361930] ACK59 sent, window starts at 58
+[1624506361931] packet58 A received
+[1624506361931] packet58 A dropped
+[1624506362436] duplicate packet58 A received, discarded
+[1624506362436] packet58 A dropped
+[1624506362942] duplicate packet58 A received, discarded
+[1624506362942] packet58 A dropped
+[1624506363448] duplicate packet58 A received, discarded
+[1624506363448] ACK58 sent, window starts at 60
+[1624506363453] packet61 e received out of order, buffered
+[1624506363453] ACK61 sent, window starts at 60
+[1624506363959] packet60 n received
+[1624506363959] ACK60 sent, window starts at 62
+[1624506363965] packet62 a received
+[1624506363965] ACK62 sent, window starts at 63
+[1624506363965] packet64   received out of order, buffered
+[1624506363965] ACK64 sent, window starts at 63
+[1624506364471] packet63 n received
+[1624506364471] packet63 n dropped
+[1624506364977] duplicate packet63 n received, discarded
+[1624506364977] ACK63 sent, window starts at 65
+[1624506364982] packet65 c received
+[1624506364982] ACK65 sent, window starts at 66
+[1624506364983] packet67 m received out of order, buffered
+[1624506364983] ACK67 sent, window starts at 66
+[1624506365494] packet66 o received
+[1624506365494] packet66 o dropped
+[1624506366000] duplicate packet66 o received, discarded
+[1624506366000] ACK66 sent, window starts at 68
+[1624506366006] packet69 o received out of order, buffered
+[1624506366006] packet69 o dropped
+[1624506366511] packet69 o received out of order, buffered
+[1624506366512] ACK69 sent, window starts at 68
+[1624506366512] packet68 m received
+[1624506366512] ACK68 sent, window starts at 70
+[1624506366517] packet70 d received
+[1624506366517] ACK70 sent, window starts at 71
+[1624506366518] packet71 o received
+[1624506366518] ACK71 sent, window starts at 72
+[1624506366518] packet72   received
+[1624506366518] ACK72 sent, window starts at 73
+[1624506366519] packet74 i received out of order, buffered
+[1624506366519] ACK74 sent, window starts at 73
+[1624506367024] packet73 l received
+[1624506367024] ACK73 sent, window starts at 75
+[1624506367024] packet76 u received out of order, buffered
+[1624506367024] packet76 u dropped
+[1624506367530] packet75 g received
+[1624506367530] packet75 g dropped
+[1624506367530] duplicate packet76 u received, discarded
+[1624506367531] packet76 u dropped
+[1624506368036] duplicate packet76 u received, discarded
+[1624506368036] ACK76 sent, window starts at 77
+[1624506368036] duplicate packet75 g received, discarded
+[1624506368036] ACK75 sent, window starts at 77
+[1624506368042] packet77 l received
+[1624506368042] packet77 l dropped
+[1624506368042] packet78 a received
+[1624506368042] packet78 a dropped
+[1624506368548] duplicate packet77 l received, discarded
+[1624506368548] ACK77 sent, window starts at 79
+[1624506368553] duplicate packet78 a received, discarded
+[1624506368553] ACK78 sent, window starts at 79
+[1624506368554] packet79   received
+[1624506368554] packet79   dropped
+[1624506368554] packet80 e received
+[1624506368554] ACK80 sent, window starts at 81
+[1624506369059] duplicate packet79   received, discarded
+[1624506369060] packet79   dropped
+[1624506369566] duplicate packet79   received, discarded
+[1624506369566] ACK79 sent, window starts at 81
+[1624506369566] packet81 g received
+[1624506369566] packet81 g dropped
+[1624506370072] packet82 e received
+[1624506370072] packet82 e dropped
+[1624506370072] duplicate packet81 g received, discarded
+[1624506370072] ACK81 sent, window starts at 83
+[1624506370078] packet83 t received
+[1624506370078] ACK83 sent, window starts at 84
+[1624506370578] duplicate packet82 e received, discarded
+[1624506370578] ACK82 sent, window starts at 84
+[1624506370584] packet84   received
+[1624506370584] packet84   dropped
+[1624506370584] packet85 d received
+[1624506370584] packet85 d dropped
+[1624506371090] duplicate packet84   received, discarded
+[1624506371090] ACK84 sent, window starts at 86
+[1624506371090] duplicate packet85 d received, discarded
+[1624506371090] packet85 d dropped
+[1624506371091] packet86 o received
+[1624506371091] packet86 o dropped
+[1624506371596] duplicate packet86 o received, discarded
+[1624506371596] packet86 o dropped
+[1624506371596] duplicate packet85 d received, discarded
+[1624506371596] ACK85 sent, window starts at 87
+[1624506371602] packet87 l received
+[1624506371602] ACK87 sent, window starts at 88
+[1624506372102] duplicate packet86 o received, discarded
+[1624506372103] packet86 o dropped
+[1624506372608] duplicate packet86 o received, discarded
+[1624506372608] packet86 o dropped
+[1624506373114] duplicate packet86 o received, discarded
+[1624506373114] ACK86 sent, window starts at 88
+[1624506373120] packet88 o received
+[1624506373120] ACK88 sent, window starts at 89
+[1624506373120] packet90 . received out of order, buffered
+[1624506373120] packet90 . dropped
+[1624506373626] packet89 r received
+[1624506373626] ACK89 sent, window starts at 91
+[1624506373632] duplicate packet90 . received, discarded
+[1624506373632] packet90 . dropped
+[1624506374138] duplicate packet90 . received, discarded
+[1624506374138] packet90 . dropped
+[1624506374143] packet91   received
+[1624506374143] ACK91 sent, window starts at 92
+[1624506374644] duplicate packet90 . received, discarded
+[1624506374644] packet90 . dropped
+[1624506375150] duplicate packet90 . received, discarded
+[1624506375150] ACK90 sent, window starts at 92
+[1624506375155] packet92 A received
+[1624506375155] ACK92 sent, window starts at 93
+[1624506375156] packet93 e received
+[1624506375156] packet93 e dropped
+[1624506375156] packet94 n received
+[1624506375156] ACK94 sent, window starts at 95
+[1624506375661] duplicate packet93 e received, discarded
+[1624506375662] packet93 e dropped
+[1624506376167] duplicate packet93 e received, discarded
+[1624506376167] ACK93 sent, window starts at 95
+[1624506376173] packet96 a received out of order, buffered
+[1624506376173] packet96 a dropped
+[1624506376679] packet95 e received
+[1624506376679] packet95 e dropped
+[1624506376679] duplicate packet96 a received, discarded
+[1624506376679] packet96 a dropped
+[1624506377185] duplicate packet95 e received, discarded
+[1624506377185] packet95 e dropped
+[1624506377185] duplicate packet96 a received, discarded
+[1624506377185] packet96 a dropped
+[1624506377691] duplicate packet95 e received, discarded
+[1624506377691] packet95 e dropped
+[1624506377691] duplicate packet96 a received, discarded
+[1624506377691] packet96 a dropped
+[1624506378197] duplicate packet96 a received, discarded
+[1624506378197] ACK96 sent, window starts at 97
+[1624506378197] duplicate packet95 e received, discarded
+[1624506378197] ACK95 sent, window starts at 97
+[1624506378203] packet97 n received
+[1624506378203] packet97 n dropped
+[1624506378709] packet98   received
+[1624506378709] ACK98 sent, window starts at 99
+[1624506378709] duplicate packet97 n received, discarded
+[1624506378709] ACK97 sent, window starts at 99
+[1624506378715] packet99 m received
+[1624506378715] ACK99 sent, window starts at 100
+[1624506378715] Message received: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m
+[Summary] <80>/<180> packets dropped, loss rate = 44.44%
 node> 
 
-Receiver:
+eric.feng@instance-1:~/emulation$ ./srnode.py 2222 1111 3 -p 0.3
 node> 
-[1624420264700] packet1 k received out of order, buffered
-[1624420264700] ACK1 sent, window starts at 0
-[1624420264701] packet0 a received
-[1624420264701] packet0 a dropped
-[1624420265207] duplicate packet0 a received, discarded
-[1624420265207] packet0 a dropped
-[1624420265713] duplicate packet0 a received, discarded
-[1624420265713] ACK0 sent, window starts at 2
-[1624420266219] packet2 l received
-[1624420266219] ACK2 sent, window starts at 3
-[1624420266220] packet3 s received
-[1624420266220] packet3 s dropped
-[1624420266220] packet4 d received
-[1624420266220] ACK4 sent, window starts at 5
-[1624420266725] duplicate packet3 s received, discarded
-[1624420266725] packet3 s dropped
-[1624420267231] duplicate packet3 s received, discarded
-[1624420267231] packet3 s dropped
-[1624420267737] duplicate packet3 s received, discarded
-[1624420267737] ACK3 sent, window starts at 5
-[1624420268243] packet5 j received
-[1624420268243] ACK5 sent, window starts at 6
-[1624420268243] packet7 l received out of order, buffered
-[1624420268243] ACK7 sent, window starts at 6
-[1624420268244] packet6 k received
-[1624420268244] packet6 k dropped
-[1624420268749] duplicate packet6 k received, discarded
-[1624420268749] packet6 k dropped
-[1624420269254] duplicate packet6 k received, discarded
-[1624420269254] ACK6 sent, window starts at 8
-[1624420269255] packet8 a received
-[1624420269255] packet8 a dropped
-[1624420269760] duplicate packet8 a received, discarded
-[1624420269760] ACK8 sent, window starts at 9
-[1624420269761] packet9 j received
-[1624420269761] packet9 j dropped
-[1624420269761] packet10 s received
-[1624420269761] packet10 s dropped
-[1624420270266] duplicate packet9 j received, discarded
-[1624420270266] packet9 j dropped
-[1624420270267] duplicate packet10 s received, discarded
-[1624420270267] ACK10 sent, window starts at 11
-[1624420270772] duplicate packet9 j received, discarded
-[1624420270772] ACK9 sent, window starts at 11
-[1624420271278] packet11 d received
-[1624420271278] ACK11 sent, window starts at 12
-[1624420271278] packet13 k received out of order, buffered
-[1624420271278] packet13 k dropped
-[1624420271278] packet12 j received
-[1624420271279] ACK12 sent, window starts at 14
-[1624420271279] packet14 ; received
-[1624420271279] packet14 ; dropped
-[1624420271784] duplicate packet13 k received, discarded
-[1624420271784] packet13 k dropped
-[1624420271790] duplicate packet14 ; received, discarded
-[1624420271790] ACK14 sent, window starts at 15
-[1624420271790] Message received: aklsdjklajsdjk;
-[Summary] <14>/<28> packets dropped, loss rate = 50.0%
+[1624506204806] packet0 F received
+[1624506204806] ACK0 sent, window starts at 1
+[1624506204806] packet1 a received
+[1624506204806] ACK1 sent, window starts at 2
+[1624506204807] packet3   received out of order, buffered
+[1624506204807] packet3   dropped
+[1624506205312] packet2 r received
+[1624506205312] ACK2 sent, window starts at 4
+[1624506205313] duplicate packet3   received, discarded
+[1624506205313] ACK3 sent, window starts at 4
+[1624506205313] packet4 f received
+[1624506205313] ACK4 sent, window starts at 5
+[1624506205819] packet5 a received
+[1624506205819] packet5 a dropped
+[1624506205819] packet6 r received
+[1624506205819] ACK6 sent, window starts at 7
+[1624506206325] duplicate packet5 a received, discarded
+[1624506206325] ACK5 sent, window starts at 7
+[1624506206330] packet7   received
+[1624506206330] packet7   dropped
+[1624506206331] packet8 a received
+[1624506206331] ACK8 sent, window starts at 9
+[1624506206836] duplicate packet7   received, discarded
+[1624506206837] packet7   dropped
+[1624506207342] duplicate packet7   received, discarded
+[1624506207342] ACK7 sent, window starts at 9
+[1624506207348] packet9 w received
+[1624506207348] packet9 w dropped
+[1624506207854] duplicate packet9 w received, discarded
+[1624506207854] ACK9 sent, window starts at 10
+[1624506207854] packet10 a received
+[1624506207854] ACK10 sent, window starts at 11
+[1624506207855] packet11 y received
+[1624506207855] ACK11 sent, window starts at 12
+[1624506207855] packet12 , received
+[1624506207855] packet12 , dropped
+[1624506207856] packet13   received
+[1624506207856] ACK13 sent, window starts at 14
+[1624506208360] duplicate packet12 , received, discarded
+[1624506208360] ACK12 sent, window starts at 14
+[1624506208366] packet14 b received
+[1624506208366] packet14 b dropped
+[1624506208366] packet15 e received
+[1624506208366] ACK15 sent, window starts at 16
+[1624506208872] duplicate packet14 b received, discarded
+[1624506208872] ACK14 sent, window starts at 16
+[1624506208878] packet17 i received out of order, buffered
+[1624506208878] ACK17 sent, window starts at 16
+[1624506209384] packet16 h received
+[1624506209384] ACK16 sent, window starts at 18
+[1624506209890] packet19 d received out of order, buffered
+[1624506209890] packet19 d dropped
+[1624506209890] packet18 n received
+[1624506209890] ACK18 sent, window starts at 20
+[1624506209896] packet20   received
+[1624506209896] ACK20 sent, window starts at 21
+[1624506210401] duplicate packet19 d received, discarded
+[1624506210401] ACK19 sent, window starts at 21
+[1624506210907] packet21 t received
+[1624506210908] packet21 t dropped
+[1624506210908] packet22 h received
+[1624506210908] ACK22 sent, window starts at 23
+[1624506211413] duplicate packet21 t received, discarded
+[1624506211413] ACK21 sent, window starts at 23
+[1624506211419] packet23 e received
+[1624506211419] packet23 e dropped
+[1624506211419] packet24   received
+[1624506211419] ACK24 sent, window starts at 25
+[1624506211925] duplicate packet23 e received, discarded
+[1624506211925] packet23 e dropped
+[1624506212430] duplicate packet23 e received, discarded
+[1624506212431] ACK23 sent, window starts at 25
+[1624506212436] packet26 o received out of order, buffered
+[1624506212437] ACK26 sent, window starts at 25
+[1624506212942] packet25 w received
+[1624506212942] packet25 w dropped
+[1624506213448] duplicate packet25 w received, discarded
+[1624506213448] ACK25 sent, window starts at 27
+[1624506213960] packet27 r received
+[1624506213960] ACK27 sent, window starts at 28
+[1624506213960] packet28 d received
+[1624506213960] packet28 d dropped
+[1624506214466] packet29   received
+[1624506214466] packet29   dropped
+[1624506214466] duplicate packet28 d received, discarded
+[1624506214466] ACK28 sent, window starts at 30
+[1624506214466] packet30 m received
+[1624506214466] packet30 m dropped
+[1624506214972] duplicate packet30 m received, discarded
+[1624506214972] ACK30 sent, window starts at 31
+[1624506214973] duplicate packet29   received, discarded
+[1624506214973] ACK29 sent, window starts at 31
+[1624506214978] packet31 o received
+[1624506214978] ACK31 sent, window starts at 32
+[1624506215484] packet32 u received
+[1624506215485] ACK32 sent, window starts at 33
+[1624506215485] packet33 n received
+[1624506215485] packet33 n dropped
+[1624506215485] packet34 t received
+[1624506215485] ACK34 sent, window starts at 35
+[1624506215990] duplicate packet33 n received, discarded
+[1624506215991] ACK33 sent, window starts at 35
+[1624506216502] packet35 a received
+[1624506216502] packet35 a dropped
+[1624506216502] packet36 i received
+[1624506216502] packet36 i dropped
+[1624506217008] duplicate packet35 a received, discarded
+[1624506217008] packet35 a dropped
+[1624506217008] duplicate packet36 i received, discarded
+[1624506217008] packet36 i dropped
+[1624506217514] duplicate packet36 i received, discarded
+[1624506217514] ACK36 sent, window starts at 37
+[1624506217514] duplicate packet35 a received, discarded
+[1624506217514] ACK35 sent, window starts at 37
+[1624506218026] packet37 n received
+[1624506218026] packet37 n dropped
+[1624506218029] packet38 s received
+[1624506218029] ACK38 sent, window starts at 39
+[1624506218531] duplicate packet37 n received, discarded
+[1624506218532] ACK37 sent, window starts at 39
+[1624506219043] packet39 , received
+[1624506219043] ACK39 sent, window starts at 40
+[1624506219043] packet40   received
+[1624506219043] packet40   dropped
+[1624506219044] packet41 f received
+[1624506219044] ACK41 sent, window starts at 42
+[1624506219549] duplicate packet40   received, discarded
+[1624506219549] ACK40 sent, window starts at 42
+[1624506219550] packet42 a received
+[1624506219550] ACK42 sent, window starts at 43
+[1624506219550] packet44   received out of order, buffered
+[1624506219550] packet44   dropped
+[1624506220055] packet44   received out of order, buffered
+[1624506220055] packet44   dropped
+[1624506220055] packet43 r received
+[1624506220055] ACK43 sent, window starts at 45
+[1624506220561] duplicate packet44   received, discarded
+[1624506220561] ACK44 sent, window starts at 45
+[1624506220561] packet45 f received
+[1624506220561] ACK45 sent, window starts at 46
+[1624506220562] packet47 o received out of order, buffered
+[1624506220562] ACK47 sent, window starts at 46
+[1624506221067] packet46 r received
+[1624506221067] ACK46 sent, window starts at 48
+[1624506221067] packet49   received out of order, buffered
+[1624506221067] ACK49 sent, window starts at 48
+[1624506221573] packet48 m received
+[1624506221573] ACK48 sent, window starts at 50
+[1624506221578] packet50 t received
+[1624506221579] packet50 t dropped
+[1624506222085] packet51 h received
+[1624506222085] ACK51 sent, window starts at 52
+[1624506222085] duplicate packet50 t received, discarded
+[1624506222085] ACK50 sent, window starts at 52
+[1624506222091] packet53   received out of order, buffered
+[1624506222091] ACK53 sent, window starts at 52
+[1624506222597] packet52 e received
+[1624506222597] ACK52 sent, window starts at 54
+[1624506223108] packet54 c received
+[1624506223108] ACK54 sent, window starts at 55
+[1624506223109] packet55 o received
+[1624506223109] packet55 o dropped
+[1624506223614] packet56 u received
+[1624506223614] ACK56 sent, window starts at 57
+[1624506223615] duplicate packet55 o received, discarded
+[1624506223615] ACK55 sent, window starts at 57
+[1624506223615] packet57 n received
+[1624506223615] ACK57 sent, window starts at 58
+[1624506223615] packet58 t received
+[1624506223615] ACK58 sent, window starts at 59
+[1624506223615] packet59 r received
+[1624506223616] ACK59 sent, window starts at 60
+[1624506223616] packet60 i received
+[1624506223616] ACK60 sent, window starts at 61
+[1624506223617] packet62 s received out of order, buffered
+[1624506223617] ACK62 sent, window starts at 61
+[1624506224121] packet61 e received
+[1624506224121] packet61 e dropped
+[1624506224627] duplicate packet61 e received, discarded
+[1624506224627] ACK61 sent, window starts at 63
+[1624506224632] packet63   received
+[1624506224632] packet63   dropped
+[1624506225138] duplicate packet63   received, discarded
+[1624506225138] packet63   dropped
+[1624506225138] packet64 V received
+[1624506225138] ACK64 sent, window starts at 65
+[1624506225644] duplicate packet63   received, discarded
+[1624506225644] ACK63 sent, window starts at 65
+[1624506226150] packet65 o received
+[1624506226150] packet65 o dropped
+[1624506226150] packet66 k received
+[1624506226151] ACK66 sent, window starts at 67
+[1624506226656] duplicate packet65 o received, discarded
+[1624506226656] packet65 o dropped
+[1624506227162] duplicate packet65 o received, discarded
+[1624506227162] ACK65 sent, window starts at 67
+[1624506227673] packet67 a received
+[1624506227674] ACK67 sent, window starts at 68
+[1624506227674] packet68 l received
+[1624506227674] packet68 l dropped
+[1624506227674] packet69 i received
+[1624506227674] ACK69 sent, window starts at 70
+[1624506228179] duplicate packet68 l received, discarded
+[1624506228179] packet68 l dropped
+[1624506228685] duplicate packet68 l received, discarded
+[1624506228685] packet68 l dropped
+[1624506229191] duplicate packet68 l received, discarded
+[1624506229191] ACK68 sent, window starts at 70
+[1624506229196] packet71   received out of order, buffered
+[1624506229196] ACK71 sent, window starts at 70
+[1624506229702] packet70 a received
+[1624506229702] ACK70 sent, window starts at 72
+[1624506230208] packet72 a received
+[1624506230208] ACK72 sent, window starts at 73
+[1624506230209] packet74 d received out of order, buffered
+[1624506230209] ACK74 sent, window starts at 73
+[1624506230209] packet73 n received
+[1624506230209] packet73 n dropped
+[1624506230714] duplicate packet73 n received, discarded
+[1624506230714] ACK73 sent, window starts at 75
+[1624506230720] packet76 C received out of order, buffered
+[1624506230720] packet76 C dropped
+[1624506231226] packet75   received
+[1624506231226] ACK75 sent, window starts at 77
+[1624506231227] duplicate packet76 C received, discarded
+[1624506231227] ACK76 sent, window starts at 77
+[1624506231227] packet78 n received out of order, buffered
+[1624506231227] ACK78 sent, window starts at 77
+[1624506231732] packet77 o received
+[1624506231733] packet77 o dropped
+[1624506232239] duplicate packet77 o received, discarded
+[1624506232239] ACK77 sent, window starts at 79
+[1624506232750] packet79 s received
+[1624506232750] ACK79 sent, window starts at 80
+[1624506232756] packet80 o received
+[1624506232756] ACK80 sent, window starts at 81
+[1624506232756] packet82 a received out of order, buffered
+[1624506232756] packet82 a dropped
+[1624506233262] packet81 n received
+[1624506233262] packet81 n dropped
+[1624506233262] duplicate packet82 a received, discarded
+[1624506233262] ACK82 sent, window starts at 83
+[1624506233768] duplicate packet81 n received, discarded
+[1624506233768] packet81 n dropped
+[1624506234274] duplicate packet81 n received, discarded
+[1624506234274] packet81 n dropped
+[1624506234779] duplicate packet81 n received, discarded
+[1624506234780] packet81 n dropped
+[1624506235285] duplicate packet81 n received, discarded
+[1624506235285] ACK81 sent, window starts at 83
+[1624506235291] packet83 n received
+[1624506235291] ACK83 sent, window starts at 84
+[1624506235291] packet84 t received
+[1624506235291] packet84 t dropped
+[1624506235291] packet85 i received
+[1624506235291] ACK85 sent, window starts at 86
+[1624506235797] duplicate packet84 t received, discarded
+[1624506235797] ACK84 sent, window starts at 86
+[1624506235803] packet86 a received
+[1624506235803] packet86 a dropped
+[1624506235803] packet87 , received
+[1624506235803] ACK87 sent, window starts at 88
+[1624506236309] duplicate packet86 a received, discarded
+[1624506236309] ACK86 sent, window starts at 88
+[1624506236310] packet89 t received out of order, buffered
+[1624506236310] ACK89 sent, window starts at 88
+[1624506236815] packet88   received
+[1624506236815] ACK88 sent, window starts at 90
+[1624506236815] packet91 e received out of order, buffered
+[1624506236816] ACK91 sent, window starts at 90
+[1624506237321] packet90 h received
+[1624506237321] ACK90 sent, window starts at 92
+[1624506237321] packet92 r received
+[1624506237321] ACK92 sent, window starts at 93
+[1624506237827] packet93 e received
+[1624506237827] packet93 e dropped
+[1624506237827] packet94   received
+[1624506237827] packet94   dropped
+[1624506238333] duplicate packet93 e received, discarded
+[1624506238333] ACK93 sent, window starts at 95
+[1624506238333] duplicate packet94   received, discarded
+[1624506238333] ACK94 sent, window starts at 95
+[1624506238334] packet95 l received
+[1624506238334] ACK95 sent, window starts at 96
+[1624506238334] packet97 v received out of order, buffered
+[1624506238334] ACK97 sent, window starts at 96
+[1624506238839] packet96 i received
+[1624506238839] packet96 i dropped
+[1624506239345] duplicate packet96 i received, discarded
+[1624506239345] ACK96 sent, window starts at 98
+[1624506239851] packet99 . received out of order, buffered
+[1624506239851] packet99 . dropped
+[1624506239851] packet98 e received
+[1624506239852] ACK98 sent, window starts at 100
+[1624506240363] duplicate packet99 . received, discarded
+[1624506240363] ACK99 sent, window starts at 100
+[1624506240363] Message received: Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live.
+[Summary] <48>/<148> packets dropped, loss rate = 32.43%
+node> send Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m
+[1624506339593] packet0 L sent
+[1624506339594] packet1 o sent
+[1624506339594] ACK1 received, window starts at 0
+[1624506340099] packet0 timeout, resending
+[1624506340605] packet0 timeout, resending
+[1624506340611] ACK0 received, window starts at 2
+[1624506340611] packet2 r sent
+[1624506340611] packet3 e sent
+[1624506340618] ACK3 received, window starts at 2
+[1624506341117] packet2 timeout, resending
+[1624506341117] ACK2 received, window starts at 4
+[1624506341117] packet4 m sent
+[1624506341117] ACK4 received, window starts at 5
+[1624506341118] packet5 dropped
+[1624506341118] packet6 i sent
+[1624506341119] ACK6 received, window starts at 5
+[1624506341623] packet5 timeout, resending
+[1624506342129] packet5 timeout, resending
+[1624506342134] ACK5 received, window starts at 7
+[1624506342134] packet7 dropped
+[1624506342135] packet8 s sent
+[1624506342640] packet7 timeout, resending
+[1624506342640] packet8 timeout, resending
+[1624506342641] ACK7 received, window starts at 8
+[1624506342641] packet9 u sent
+[1624506342641] ACK9 received, window starts at 8
+[1624506343146] packet8 timeout, resending
+[1624506343152] ACK8 received, window starts at 10
+[1624506343152] packet10 m sent
+[1624506343152] packet11   sent
+[1624506343153] ACK11 received, window starts at 10
+[1624506343658] packet10 timeout, resending
+[1624506344164] packet10 timeout, resending
+[1624506344165] ACK10 received, window starts at 12
+[1624506344165] packet12 d sent
+[1624506344165] packet13 o sent
+[1624506344670] packet12 timeout, resending
+[1624506344671] ACK12 received, window starts at 13
+[1624506344671] packet13 timeout, resending
+[1624506344671] ACK13 received, window starts at 14
+[1624506344671] packet14 l sent
+[1624506344672] packet15 o sent
+[1624506344672] ACK15 received, window starts at 14
+[1624506345176] packet14 timeout, resending
+[1624506345182] ACK14 received, window starts at 16
+[1624506345182] packet16 r sent
+[1624506345182] packet17   sent
+[1624506345182] ACK17 received, window starts at 16
+[1624506345683] packet16 timeout, resending
+[1624506345683] ACK16 received, window starts at 18
+[1624506345683] packet18 dropped
+[1624506345684] packet19 i sent
+[1624506345684] ACK19 received, window starts at 18
+[1624506346189] packet18 timeout, resending
+[1624506346695] packet18 timeout, resending
+[1624506347201] packet18 timeout, resending
+[1624506347706] packet18 timeout, resending
+[1624506347712] ACK18 received, window starts at 20
+[1624506347712] packet20 t sent
+[1624506347712] ACK20 received, window starts at 21
+[1624506347713] packet21   sent
+[1624506347713] ACK21 received, window starts at 22
+[1624506347713] packet22 dropped
+[1624506347713] packet23 dropped
+[1624506348218] packet22 timeout, resending
+[1624506348219] ACK22 received, window starts at 23
+[1624506348219] packet23 timeout, resending
+[1624506348219] packet24 e sent
+[1624506348219] ACK24 received, window starts at 23
+[1624506348724] packet23 timeout, resending
+[1624506348730] ACK23 received, window starts at 25
+[1624506348730] packet25 t sent
+[1624506348730] packet26 dropped
+[1624506349236] packet26 timeout, resending
+[1624506349236] packet25 timeout, resending
+[1624506349242] ACK25 received, window starts at 26
+[1624506349242] packet27 dropped
+[1624506349742] packet26 timeout, resending
+[1624506349748] packet27 timeout, resending
+[1624506349748] ACK26 received, window starts at 27
+[1624506349748] packet28 c sent
+[1624506349748] ACK28 received, window starts at 27
+[1624506350254] packet27 timeout, resending
+[1624506350760] packet27 timeout, resending
+[1624506351265] packet27 timeout, resending
+[1624506351771] packet27 timeout, resending
+[1624506351777] ACK27 received, window starts at 29
+[1624506351777] packet29 dropped
+[1624506351793] packet30 dropped
+[1624506352299] packet29 timeout, resending
+[1624506352299] ACK29 received, window starts at 30
+[1624506352300] packet31 s sent
+[1624506352300] ACK31 received, window starts at 30
+[1624506352300] packet30 timeout, resending
+[1624506352805] packet30 timeout, resending
+[1624506352810] ACK30 received, window starts at 32
+[1624506352810] packet32 dropped
+[1624506352811] packet33 c sent
+[1624506352811] ACK33 received, window starts at 32
+[1624506353316] packet32 timeout, resending
+[1624506353317] ACK32 received, window starts at 34
+[1624506353317] packet34 dropped
+[1624506353317] packet35 e sent
+[1624506353822] packet34 timeout, resending
+[1624506353823] packet35 timeout, resending
+[1624506353828] ACK34 received, window starts at 35
+[1624506353828] packet36 t sent
+[1624506354328] packet35 timeout, resending
+[1624506354334] packet36 timeout, resending
+[1624506354334] ACK36 received, window starts at 35
+[1624506354834] packet35 timeout, resending
+[1624506354835] ACK35 received, window starts at 37
+[1624506354835] packet37 dropped
+[1624506354835] packet38 e sent
+[1624506354841] ACK38 received, window starts at 37
+[1624506355340] packet37 timeout, resending
+[1624506355341] ACK37 received, window starts at 39
+[1624506355341] packet39 r sent
+[1624506355341] ACK39 received, window starts at 40
+[1624506355341] packet40 dropped
+[1624506355341] packet41 dropped
+[1624506355846] packet40 timeout, resending
+[1624506355847] packet41 timeout, resending
+[1624506356352] packet41 timeout, resending
+[1624506356352] packet40 timeout, resending
+[1624506356858] packet40 timeout, resending
+[1624506356858] packet41 timeout, resending
+[1624506357364] packet40 timeout, resending
+[1624506357364] packet41 timeout, resending
+[1624506357365] ACK40 received, window starts at 41
+[1624506357365] ACK41 received, window starts at 42
+[1624506357365] packet42 dropped
+[1624506357365] packet43 i sent
+[1624506357365] ACK43 received, window starts at 42
+[1624506357870] packet42 timeout, resending
+[1624506357876] ACK42 received, window starts at 44
+[1624506357876] packet44 p sent
+[1624506357876] ACK44 received, window starts at 45
+[1624506357876] packet45 i sent
+[1624506357876] packet46 dropped
+[1624506358382] packet45 timeout, resending
+[1624506358387] ACK45 received, window starts at 46
+[1624506358388] packet46 timeout, resending
+[1624506358388] packet47 dropped
+[1624506358893] packet46 timeout, resending
+[1624506358894] packet47 timeout, resending
+[1624506358894] ACK46 received, window starts at 47
+[1624506358894] ACK47 received, window starts at 48
+[1624506358894] packet48 i sent
+[1624506358895] packet49 n sent
+[1624506358895] ACK49 received, window starts at 48
+[1624506359399] packet48 timeout, resending
+[1624506359905] packet48 timeout, resending
+[1624506359906] ACK48 received, window starts at 50
+[1624506359906] packet50 g sent
+[1624506359906] ACK50 received, window starts at 51
+[1624506359906] packet51   sent
+[1624506359906] ACK51 received, window starts at 52
+[1624506359907] packet52 e sent
+[1624506359907] ACK52 received, window starts at 53
+[1624506359907] packet53 l sent
+[1624506359907] ACK53 received, window starts at 54
+[1624506359907] packet54 i sent
+[1624506359907] ACK54 received, window starts at 55
+[1624506359908] packet55 t sent
+[1624506359908] packet56 . sent
+[1624506360411] packet55 timeout, resending
+[1624506360412] packet56 timeout, resending
+[1624506360412] ACK55 received, window starts at 56
+[1624506360412] packet57   sent
+[1624506360918] packet56 timeout, resending
+[1624506360921] packet57 timeout, resending
+[1624506361423] packet57 timeout, resending
+[1624506361424] packet56 timeout, resending
+[1624506361429] ACK56 received, window starts at 57
+[1624506361429] packet58 dropped
+[1624506361929] packet57 timeout, resending
+[1624506361930] ACK57 received, window starts at 58
+[1624506361930] packet59 e sent
+[1624506361930] ACK59 received, window starts at 58
+[1624506361930] packet58 timeout, resending
+[1624506362435] packet58 timeout, resending
+[1624506362941] packet58 timeout, resending
+[1624506363447] packet58 timeout, resending
+[1624506363453] ACK58 received, window starts at 60
+[1624506363453] packet60 dropped
+[1624506363453] packet61 e sent
+[1624506363454] ACK61 received, window starts at 60
+[1624506363959] packet60 timeout, resending
+[1624506363965] ACK60 received, window starts at 62
+[1624506363965] packet62 a sent
+[1624506363965] ACK62 received, window starts at 63
+[1624506363965] packet63 dropped
+[1624506363965] packet64   sent
+[1624506363966] ACK64 received, window starts at 63
+[1624506364471] packet63 timeout, resending
+[1624506364977] packet63 timeout, resending
+[1624506364982] ACK63 received, window starts at 65
+[1624506364982] packet65 c sent
+[1624506364983] ACK65 received, window starts at 66
+[1624506364983] packet66 dropped
+[1624506364983] packet67 m sent
+[1624506364983] ACK67 received, window starts at 66
+[1624506365494] packet66 timeout, resending
+[1624506365999] packet66 timeout, resending
+[1624506366005] ACK66 received, window starts at 68
+[1624506366005] packet68 dropped
+[1624506366006] packet69 o sent
+[1624506366511] packet69 timeout, resending
+[1624506366512] packet68 timeout, resending
+[1624506366512] ACK69 received, window starts at 68
+[1624506366517] ACK68 received, window starts at 70
+[1624506366517] packet70 d sent
+[1624506366518] ACK70 received, window starts at 71
+[1624506366518] packet71 o sent
+[1624506366518] ACK71 received, window starts at 72
+[1624506366518] packet72   sent
+[1624506366518] ACK72 received, window starts at 73
+[1624506366518] packet73 dropped
+[1624506366519] packet74 i sent
+[1624506366519] ACK74 received, window starts at 73
+[1624506367024] packet73 timeout, resending
+[1624506367024] ACK73 received, window starts at 75
+[1624506367024] packet75 dropped
+[1624506367024] packet76 u sent
+[1624506367530] packet75 timeout, resending
+[1624506367530] packet76 timeout, resending
+[1624506368036] packet76 timeout, resending
+[1624506368036] packet75 timeout, resending
+[1624506368036] ACK76 received, window starts at 75
+[1624506368041] ACK75 received, window starts at 77
+[1624506368042] packet77 l sent
+[1624506368042] packet78 a sent
+[1624506368548] packet77 timeout, resending
+[1624506368553] ACK77 received, window starts at 78
+[1624506368553] packet78 timeout, resending
+[1624506368553] ACK78 received, window starts at 79
+[1624506368554] packet79   sent
+[1624506368554] packet80 e sent
+[1624506368554] ACK80 received, window starts at 79
+[1624506369059] packet79 timeout, resending
+[1624506369565] packet79 timeout, resending
+[1624506369566] ACK79 received, window starts at 81
+[1624506369566] packet81 g sent
+[1624506369567] packet82 dropped
+[1624506370072] packet82 timeout, resending
+[1624506370072] packet81 timeout, resending
+[1624506370077] ACK81 received, window starts at 82
+[1624506370078] packet83 t sent
+[1624506370078] ACK83 received, window starts at 82
+[1624506370578] packet82 timeout, resending
+[1624506370583] ACK82 received, window starts at 84
+[1624506370584] packet84   sent
+[1624506370584] packet85 d sent
+[1624506371090] packet84 timeout, resending
+[1624506371090] packet85 timeout, resending
+[1624506371091] ACK84 received, window starts at 85
+[1624506371091] packet86 o sent
+[1624506371596] packet86 timeout, resending
+[1624506371596] packet85 timeout, resending
+[1624506371602] ACK85 received, window starts at 86
+[1624506371602] packet87 l sent
+[1624506371602] ACK87 received, window starts at 86
+[1624506372102] packet86 timeout, resending
+[1624506372608] packet86 timeout, resending
+[1624506373114] packet86 timeout, resending
+[1624506373119] ACK86 received, window starts at 88
+[1624506373119] packet88 o sent
+[1624506373120] ACK88 received, window starts at 89
+[1624506373120] packet89 dropped
+[1624506373120] packet90 . sent
+[1624506373626] packet89 timeout, resending
+[1624506373631] ACK89 received, window starts at 90
+[1624506373632] packet91 dropped
+[1624506373632] packet90 timeout, resending
+[1624506374137] packet90 timeout, resending
+[1624506374143] packet91 timeout, resending
+[1624506374144] ACK91 received, window starts at 90
+[1624506374643] packet90 timeout, resending
+[1624506375149] packet90 timeout, resending
+[1624506375155] ACK90 received, window starts at 92
+[1624506375155] packet92 A sent
+[1624506375155] ACK92 received, window starts at 93
+[1624506375156] packet93 e sent
+[1624506375156] packet94 n sent
+[1624506375156] ACK94 received, window starts at 93
+[1624506375661] packet93 timeout, resending
+[1624506376167] packet93 timeout, resending
+[1624506376173] ACK93 received, window starts at 95
+[1624506376173] packet95 dropped
+[1624506376173] packet96 a sent
+[1624506376679] packet95 timeout, resending
+[1624506376679] packet96 timeout, resending
+[1624506377185] packet95 timeout, resending
+[1624506377185] packet96 timeout, resending
+[1624506377691] packet95 timeout, resending
+[1624506377691] packet96 timeout, resending
+[1624506378197] packet96 timeout, resending
+[1624506378197] packet95 timeout, resending
+[1624506378197] ACK96 received, window starts at 95
+[1624506378203] ACK95 received, window starts at 97
+[1624506378203] packet97 n sent
+[1624506378203] packet98 dropped
+[1624506378709] packet98 timeout, resending
+[1624506378709] packet97 timeout, resending
+[1624506378709] ACK98 received, window starts at 97
+[1624506378715] ACK97 received, window starts at 99
+[1624506378715] packet99 m sent
+[1624506378715] ACK99 received, window starts at 100
+[Summary] <29>/<100> packets dropped, loss rate = 29.0%
 node> 
-[1624420272290] packet13 k received out of order, buffered
-[1624420272290] ACK13 sent, window starts at 0
+
 
 PA 2:
 
