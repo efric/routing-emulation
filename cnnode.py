@@ -5,12 +5,13 @@ import json
 from random import seed, random
 from copy import deepcopy
 from nodehelper import *
+from collections import defaultdict
 
 seed()
 
 # constants
 window_size = 5
-probe_msg = "abcdefghij"
+probe_msg = "Far far away, behind the word mountains, far from."
 
 # dv
 lock = threading.Lock()
@@ -20,123 +21,13 @@ neighbors = set()
 
 # sr
 change = False
-senders = {}
-receivers = {}
+sender = {}
+receiver = {}
 start_probe = False
+neighbors_cost = {}
 
 
-def print_rt(me):
-    print('[{}] Node {} Routing Table'.format(current_milli_time(), me))
-    for node, distance in rt.items():
-        if node == me or node == -1:
-            continue
-
-        if node in next_hop:
-            print('- ({:.2f}) -> Node {}; Next hop -> Node {}'.format(distance, node, next_hop[node]))
-        else:
-            print('- ({:.2f}) -> Node {}'.format(distance, node))
-
-
-def timeout(server, seq, packet, peer_port, done):
-    global change
-    while True:
-        time.sleep(0.5)
-        lock.acquire()
-        if seq in senders[peer_port]["acknowledged"]:
-            if done:
-                new_rate = senders[peer_port]["dropped"] / senders[peer_port]["total"]
-                if new_rate != rt[peer_port]:
-                    change = True
-                rt[peer_port] = new_rate
-            lock.release()
-            break
-        server.sendto(packet, ('127.0.0.1', peer_port))
-        senders[peer_port]["seen"].add(seq)
-        lock.release()
-
-
-def send_probe(server, node, drop):
-    threads = []
-
-    def send_msg(seq, data, done, drop, node):
-        lock.acquire()
-        packet = str(seq) + data
-        if done:
-            packet += "\0"
-        packet = packet.encode()
-
-        if drop <= random():
-            server.sendto(packet, ('127.0.0.1', node))
-        else:
-            senders[node]["dropped"] += 1
-        senders[node]["seen"].add(seq)
-        senders[node]["total"] += 1
-        lock.release()
-        if drop <= random():
-            server.sendto(packet, ('127.0.0.1', node))
-        threads.append(threading.Thread(target=timeout, args=(server, seq, packet, node, done)))
-        threads[-1].start()
-
-    while True:
-        lock.acquire()
-        senders[node]["end"] = min(senders[node]["end"], len(probe_msg))
-        if senders[node]["start"] >= len(probe_msg):
-            lock.release()
-            break
-        curr_sender_start, curr_sender_end = senders[node]["start"], senders[node]["end"]
-        lock.release()
-
-        for n in range(curr_sender_start, curr_sender_end):
-            lock.acquire()
-            viable = n not in senders[node]["seen"]
-            lock.release()
-            if viable:
-                if n == len(probe_msg) - 1:
-                    send_msg(n, probe_msg[n], True, drop, node)
-                else:
-                    send_msg(n, probe_msg[n], False, drop, node)
-
-    for t in threads:
-        if t:
-            t.join()
-
-
-def probe(server):
-    while True:
-        lock.acquire()
-        if not start_probe:
-            lock.release()
-            continue
-        lock.release()
-        for node in senders.keys():
-            if node == -1 or senders[node]["loss"] == -1:  # haven't received rate yet
-                continue
-            drop = senders[node]["loss"]
-            threading.Thread(target=send_probe, args=(server, node, drop)).start()
-        time.sleep(3)
-
-
-def update_timer(server, ip, me):
-    global change
-    while True:
-        lock.acquire()
-        if change:
-            sendchanges(server, ip, me)
-            change = False
-        lock.release()
-        time.sleep(5)
-
-
-def sendchanges(server, ip, me):
-    for neighbor in neighbors:
-        curr_table = deepcopy(rt)
-        if neighbor in receivers:
-            curr_table[-1] = receivers[neighbor]["loss"]
-            print("send", neighbor, curr_table)
-        print('[{}] Message sent from Node {} to Node {}'.format(current_milli_time(), me, neighbor))
-        server.sendto(str.encode(json.dumps(curr_table)), (ip, neighbor))
-
-
+# helpers for SR
 def find_index(receiver_buffer):
     for i, v in enumerate(receiver_buffer):
         if v == '\0':
@@ -153,69 +44,217 @@ def no_blanks(receiver_final, receiver_buffer):
     return True
 
 
-def update_rt(data, port, first, server, ip, me):
+def print_rt(me):
+    print('[{}] Node {} Routing Table'.format(current_milli_time(), me))
+    for node, distance in rt.items():
+        if node == me or node == -1:
+            continue
+
+        if node in next_hop:
+            print('- ({:.2f}) -> Node {}; Next hop -> Node {}'.format(distance, node, next_hop[node]))
+        else:
+            print('- ({:.2f}) -> Node {}'.format(distance, node))
+
+
+def timeout(server, seq, packet, peer_port):
+    global change
+    while True:
+        time.sleep(0.5)
+        lock.acquire()
+        if seq in sender[peer_port]["acknowledged"]:
+            lock.release()
+            break
+        server.sendto(packet, ('127.0.0.1', peer_port))
+        sender[peer_port]["seen"].add(seq)
+        lock.release()
+
+
+def send_probe(server, node, drop, threads):
+    def send_msg(seq, data, done, drop, node):
+        lock.acquire()
+        packet = str(seq) + data
+        if done:
+            packet += "\0"
+        packet = packet.encode()
+
+        if drop <= random():
+            server.sendto(packet, ('127.0.0.1', node))
+        else:
+            sender[node]["dropped"] += 1
+        sender[node]["seen"].add(seq)
+        sender[node]["total"] += 1
+        lock.release()
+        if drop <= random():
+            server.sendto(packet, ('127.0.0.1', node))
+        threads.append(threading.Thread(target=timeout, args=(server, seq, packet, node)))
+        threads[-1].start()
+
+    lock.acquire()
+    sender[node]["start"] = 0
+    sender[node]["end"] = window_size - 1
+    lock.release()
+
+    while True:
+        lock.acquire()
+        sender[node]["end"] = min(sender[node]["end"], len(probe_msg))
+        if sender[node]["start"] >= len(probe_msg):
+            lock.release()
+            break
+        curr_sender_start, curr_sender_end = sender[node]["start"], sender[node]["end"]
+        lock.release()
+
+        for n in range(curr_sender_start, curr_sender_end):
+            lock.acquire()
+            viable = n not in sender[node]["seen"]
+            lock.release()
+            if viable:
+                if n == len(probe_msg) - 1:
+                    send_msg(n, probe_msg[n], True, drop, node)
+                else:
+                    send_msg(n, probe_msg[n], False, drop, node)
+
+
+def send_probe_wrapper(server, node, drop):
+    global change
+
+    threads = []
+    send_probe(server, node, drop, threads)
+
+    for t in threads:
+        if t:
+            t.join()
+    lock.acquire()
+    sender[node]["acknowledged"].clear()
+    sender[node]["seen"].clear()
+    new_rate = round(sender[node]["dropped"] / sender[node]["total"], 2)
+    if node not in neighbors_cost or new_rate != neighbors_cost[node]:
+        print(new_rate, node, rt, neighbors_cost)
+        change = True
+        neighbors_cost[node] = new_rate
+        rt[node] = new_rate
+    lock.release()
+
+
+def probe(server):  # send probe message every 3 seconds to probe receivers
     global start_probe
 
+    while True:
+        for node in sender.keys():
+            if sender[node]["loss"] != -1:  # if we have received loss rate from a receiver then start probe message
+                lock.acquire()
+                start_probe = True
+                sender[node]["dropped"] = 0
+                sender[node]["total"] = 0
+                drop = sender[node]["loss"]
+                lock.release()
+                threading.Thread(target=send_probe_wrapper, args=(server, node, drop)).start()
+        time.sleep(10)  # send probe packet in 20 second intervals
+
+
+def update_timer(server, ip, me):
+    global change
+    while True:
+        if start_probe:
+            lock.acquire()
+            if change:
+                sendchanges(server, ip, me)
+                change = False
+            lock.release()
+            time.sleep(5)
+
+
+def sendchanges(server, ip, me):
+    for neighbor in neighbors:
+        curr_table = deepcopy(rt)
+        if neighbor in receiver:
+            curr_table[-1] = receiver[neighbor]["loss"]
+        print("send", neighbor, curr_table)
+        print('[{}] Message sent from Node {} to Node {}'.format(current_milli_time(), me, neighbor))
+        server.sendto(str.encode(json.dumps(curr_table)), (ip, neighbor))
+
+
+def update_rt(data, port, first, server, ip, me):
     lock.acquire()
     table_change = False
     if data.isdigit():  # SENDER received an ack
         ack = int(data)
-        senders[port]["acknowledged"].add(ack)
+        sender[port]["acknowledged"].add(ack)
 
-        if ack == senders[port]["start"]:
-            seen = senders[port]["seen"]
-            acknowledged = senders[port]["acknowledged"]
+        if ack == sender[port]["start"]:
+            seen = sender[port]["seen"]
+            acknowledged = sender[port]["acknowledged"]
 
             difference = seen.difference(acknowledged)
             sender_start = min(difference) if difference else max(acknowledged) + 1
             sender_end = sender_start + window_size - 1
 
-            senders[port]["start"] = sender_start
-            senders[port]["end"] = sender_end
+            sender[port]["start"] = sender_start
+            sender[port]["end"] = sender_end
     elif data[0].isdigit():  # RECEIVER received data
 
         if data[-1] == "\0":
             seq = int(data[:-2])
             data = data[-2]
-            receivers[port]["receiver_final"] = seq
+            receiver[port]["receiver_final"] = seq
         else:
             seq = int(data[:-1])
             data = data[-1]
 
-        if seq > receivers[port]["start"]:
-            receivers[port]["buffer"][seq] = data
-        elif seq == receivers[port]["start"]:
-            receivers[port]["buffer"][seq] = data
-            receivers[port]["start"] = find_index(receivers[port]["buffer"])
+        if seq > receiver[port]["start"]:
+            receiver[port]["buffer"][seq] = data
+        elif seq == receiver[port]["start"]:
+            receiver[port]["buffer"][seq] = data
+            receiver[port]["start"] = find_index(receiver[port]["buffer"])
 
         packet = str(seq).encode()
         server.sendto(packet, ('127.0.0.1', port))
 
-        if no_blanks(receivers[port]["receiver_final"], receivers[port]["buffer"]) and receivers[port]["done"]:
-            receivers[port]["start"] = receivers[port]["end"] = 0
-            receivers[port]["buffer"] = ['\0'] * 65535
-            receivers[port]["done"] = False
-            receivers[port]["receiver_final"] = -1
+        if no_blanks(receiver[port]["receiver_final"], receiver[port]["buffer"]):
+            receiver[port]["start"] = receiver[port]["end"] = 0
+            receiver[port]["buffer"] = ['\0'] * 65535
+            receiver[port]["receiver_final"] = -1
     else:  # DV NODE
         print('[{}] Message received from Node {} to Node {}'.format(current_milli_time(), port, me))
-        d = json.loads(data)
-        start_probe = True
+        d = {int(node): round(float(dv), 2) for node, dv in json.loads(data).items()}
 
-        for node, dv in d.items():
-            node, dv = int(node), float(dv)
-            if node == -1:  # received probe rate
-                senders[port]["loss"] = dv
-            else:
-                if node not in rt or rt[node] == 0 or rt[port] + dv < rt[node]:
-                    table_change = True
-                    rt[node] = rt[port] + dv
-                    next_hop[node] = port
+        print(port, d)
+
+        if -1 in d:  # received probe rate
+            sender[port]["loss"] = d[-1]
+
+        if port in receiver and d[me] != 0:  # received link cost from sender
+            table_change = True
+            neighbors_cost[port] = d[me]
+            rt[port] = d[me]
+
+        if port in neighbors_cost:
+            for node, dv in d.items():
+                if node == -1:
+                    continue
+                else:
+                    if dv != 0 and neighbors_cost[port] != 0 and (node not in rt or neighbors_cost[port] + dv < rt[node]):
+                        table_change = True
+                        rt[node] = neighbors_cost[port] + dv
+                        next_hop[node] = port
 
         if table_change or first:
             sendchanges(server, ip, me)
 
         print_rt(me)
     lock.release()
+
+
+def status():
+    if start_probe:
+        while True:
+            lock.acquire()
+            for node in sender.keys():
+                rate = 0 if sender[node]["total"] == 0 else sender[node]["dropped"] / sender[node]["total"]
+                print('[{}] Link to {}: {} packets sent, {} packets lost, loss rate {}'.format(
+                    current_milli_time(), node, sender[node]["total"], sender[node]["dropped"],
+                    rate))
+            lock.release()
+            time.sleep(1)
 
 
 def listen(server, me):
@@ -227,19 +266,13 @@ def listen(server, me):
             first = False
 
 
-def status():
-    while True:
-        lock.acquire()
-        for node in senders.keys():
-            rate = 0 if senders[node]["total"] == 0 else senders[node]["dropped"] / senders[node]["total"]
-            print('[{}] Link to {}: {} packets sent, {} packets lost, loss rate {}'.format(
-                current_milli_time(), node, senders[node]["total"], senders[node]["dropped"],
-                rate))
-        lock.release()
-        time.sleep(1)
-
-
 def init(args):
+    if len(args) < 4:
+        sys.exit(
+            "cnnode <local-port> receive <neighbor1-port>"
+            "<loss-rate-1> <neighbor2-port> <loss-rate-2> ... "
+            "<neighborM-port> <loss-rate-M> send <neighbor(M+1)-port>"
+            "<neighbor(M+2)-port> ... <neighborN-port> [last]")
     global start_probe
 
     local_port = int(args[1])
@@ -256,41 +289,38 @@ def init(args):
     receiving_list = neighbor_info[neighbor_info.index("receive") + 1:neighbor_info.index("send")]
     sending_list = [int(n) for n in neighbor_info[neighbor_info.index("send") + 1:]]
 
-    for neighbor_port in sending_list:
-        if neighbor_port < 1024 or neighbor_port > 65534:
+    for port in sending_list:
+        if port < 1024 or port > 65534:
             exit("UDP port number must be between 1024-65534")
-        rt[neighbor_port] = 0
-        neighbors.add(neighbor_port)
-        senders[neighbor_port] = {}
-        senders[neighbor_port]["start"] = 0
-        senders[neighbor_port]["end"] = window_size - 1
-        senders[neighbor_port]["dropped"] = 0
-        senders[neighbor_port]["total"] = 0
-        senders[neighbor_port]["seen"] = set()
-        senders[neighbor_port]["acknowledged"] = set()
-        senders[neighbor_port]["loss"] = -1
+        rt[port] = 0
+        neighbors.add(port)
+        sender[port] = {}
+        sender[port]["dropped"] = 0
+        sender[port]["total"] = 0
+        sender[port]["seen"] = set()
+        sender[port]["acknowledged"] = set()
+        sender[port]["loss"] = -1
 
     for i in range(0, len(receiving_list), 2):
-        neighbor_port, initial_loss_rate = int(receiving_list[i]), float(
-            receiving_list[i + 1])  # i+1 is rate for sr protocol
-        if neighbor_port < 1024 or neighbor_port > 65534:
+        port, initial_loss_rate = int(receiving_list[i]), float(
+            receiving_list[i + 1])
+        if port < 1024 or port > 65534:
             exit("UDP port number must be between 1024-65534")
-        rt[neighbor_port] = 0
-        neighbors.add(neighbor_port)
-        receivers[neighbor_port] = {}
-        receivers[neighbor_port]["loss"] = initial_loss_rate
-        receivers[neighbor_port]["buffer"] = ['\0'] * 65535
-        receivers[neighbor_port]["start"] = 0
-        receivers[neighbor_port]["end"] = window_size - 1
-        receivers[neighbor_port]["done"] = False
-        receivers[neighbor_port]["receiver_final"] = -1
+        rt[port] = 0
+        neighbors.add(port)
+        receiver[port] = {}
+        receiver[port]["loss"] = initial_loss_rate
+        receiver[port]["buffer"] = ['\0'] * 65535
+        receiver[port]["start"] = 0
+        receiver[port]["end"] = window_size - 1
+        receiver[port]["done"] = False
+        receiver[port]["receiver_final"] = -1
 
     rt[local_port] = 0
     server = create_listen_socket(local_port)
 
     print_rt(local_port)
     if last:
-        start_probe = True
         sendchanges(server, '127.0.0.1', local_port)
 
     threading.Thread(target=probe, args=(server,)).start()
