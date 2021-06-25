@@ -5,13 +5,12 @@ import json
 from random import seed, random
 from copy import deepcopy
 from nodehelper import *
-from collections import defaultdict
 
 seed()
 
 # constants
 window_size = 5
-probe_msg = "Far far away, behind the word mountains, far from."
+probe_msg = "Far far aw"
 
 # dv
 lock = threading.Lock()
@@ -84,8 +83,6 @@ def send_probe(server, node, drop, threads):
         sender[node]["seen"].add(seq)
         sender[node]["total"] += 1
         lock.release()
-        if drop <= random():
-            server.sendto(packet, ('127.0.0.1', node))
         threads.append(threading.Thread(target=timeout, args=(server, seq, packet, node)))
         threads[-1].start()
 
@@ -128,7 +125,7 @@ def send_probe_wrapper(server, node, drop):
     sender[node]["seen"].clear()
     new_rate = round(sender[node]["dropped"] / sender[node]["total"], 2)
     if node not in neighbors_cost or new_rate != neighbors_cost[node]:
-        print(new_rate, node, rt, neighbors_cost)
+        # print(new_rate, node, rt, neighbors_cost)
         change = True
         neighbors_cost[node] = new_rate
         rt[node] = new_rate
@@ -143,8 +140,8 @@ def probe(server):  # send probe message every 3 seconds to probe receivers
             if sender[node]["loss"] != -1:  # if we have received loss rate from a receiver then start probe message
                 lock.acquire()
                 start_probe = True
-                sender[node]["dropped"] = 0
-                sender[node]["total"] = 0
+                # sender[node]["dropped"] = 0
+                # sender[node]["total"] = 0
                 drop = sender[node]["loss"]
                 lock.release()
                 threading.Thread(target=send_probe_wrapper, args=(server, node, drop)).start()
@@ -168,7 +165,7 @@ def sendchanges(server, ip, me):
         curr_table = deepcopy(rt)
         if neighbor in receiver:
             curr_table[-1] = receiver[neighbor]["loss"]
-        print("send", neighbor, curr_table)
+        # print("send", neighbor, curr_table)
         print('[{}] Message sent from Node {} to Node {}'.format(current_milli_time(), me, neighbor))
         server.sendto(str.encode(json.dumps(curr_table)), (ip, neighbor))
 
@@ -217,7 +214,7 @@ def update_rt(data, port, first, server, ip, me):
         print('[{}] Message received from Node {} to Node {}'.format(current_milli_time(), port, me))
         d = {int(node): round(float(dv), 2) for node, dv in json.loads(data).items()}
 
-        print(port, d)
+        # print(port, d)
 
         if -1 in d:  # received probe rate
             sender[port]["loss"] = d[-1]
@@ -225,14 +222,19 @@ def update_rt(data, port, first, server, ip, me):
         if port in receiver and d[me] != 0:  # received link cost from sender
             table_change = True
             neighbors_cost[port] = d[me]
-            rt[port] = d[me]
+            rt[port] = d[me] if port not in next_hop.keys() else min(d[me], rt[port])
+
+            for node, value in rt.items():
+                if node in next_hop and next_hop[node] == port:
+                    rt[node] = d[me] + d[node]
 
         if port in neighbors_cost:
             for node, dv in d.items():
                 if node == -1:
                     continue
                 else:
-                    if dv != 0 and neighbors_cost[port] != 0 and (node not in rt or neighbors_cost[port] + dv < rt[node]):
+                    if dv != 0 and neighbors_cost[port] != 0 and (
+                            node not in rt or neighbors_cost[port] + dv < rt[node]):
                         table_change = True
                         rt[node] = neighbors_cost[port] + dv
                         next_hop[node] = port
@@ -245,11 +247,11 @@ def update_rt(data, port, first, server, ip, me):
 
 
 def status():
-    if start_probe:
-        while True:
+    while True:
+        if start_probe:
             lock.acquire()
             for node in sender.keys():
-                rate = 0 if sender[node]["total"] == 0 else sender[node]["dropped"] / sender[node]["total"]
+                rate = 0 if sender[node]["total"] == 0 else round(sender[node]["dropped"] / sender[node]["total"], 2)
                 print('[{}] Link to {}: {} packets sent, {} packets lost, loss rate {}'.format(
                     current_milli_time(), node, sender[node]["total"], sender[node]["dropped"],
                     rate))
